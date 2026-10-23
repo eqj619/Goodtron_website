@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
+import { useI18n } from "@/i18n";
 
 export const Footer = () => {
+  const { t } = useI18n();
   return (
     <footer
       data-testid="site-footer"
@@ -25,24 +27,23 @@ export const Footer = () => {
               </div>
             </div>
             <p className="mt-5 text-gray-400 text-[15px] leading-relaxed max-w-md">
-              SMT & PCB assembly, prototype builds, and low-volume production —
-              from Vista, California.
+              {t("footer.tagline")}
             </p>
           </div>
 
           <div className="md:col-span-3">
             <div className="text-sm md:text-[15px] tracking-widest text-red-500 uppercase font-bold mb-4">
-              Navigate
+              {t("footer.navigate")}
             </div>
             <ul className="space-y-2 text-[15px]">
               {NAV.map((n) => (
                 <li key={n.to}>
                   <Link
                     to={n.to}
-                    data-testid={`footer-link-${n.label.toLowerCase()}`}
+                    data-testid={`footer-link-${n.key}`}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    {n.label}
+                    {t(`nav.${n.key}`, { defaultValue: n.label })}
                   </Link>
                 </li>
               ))}
@@ -51,7 +52,7 @@ export const Footer = () => {
 
           <div className="md:col-span-3">
             <div className="text-sm md:text-[15px] tracking-widest text-red-500 uppercase font-bold mb-4">
-              Contact
+              {t("footer.contact")}
             </div>
             <ul className="space-y-3 text-[14px]">
               <li>
@@ -80,14 +81,14 @@ export const Footer = () => {
               </li>
               <li className="flex items-start gap-2 text-gray-300" data-testid="footer-hours">
                 <Clock size={14} className="text-red-500 mt-1 shrink-0" />
-                <span>{SITE.hours}</span>
+                <span>{t("site.hours", { defaultValue: SITE.hours })}</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-gray-500">
-          <div>© {new Date().getFullYear()} Goodtron Electronics. All rights reserved.</div>
+          <div>{t("footer.rights", { year: new Date().getFullYear() })}</div>
           <div className="font-mono tracking-wider">PCB · SMT · PROTOTYPE · LOW-VOLUME</div>
         </div>
       </div>

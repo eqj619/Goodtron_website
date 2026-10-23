@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CloudUpload, FileArchive, FileText, X } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 const ACCEPTED_EXT = [
   "zip", "7z", "rar", "tgz", "gz",
@@ -16,6 +17,7 @@ export const formatBytes = (n) =>
 const extOf = (name) => name.split(".").pop().toLowerCase();
 
 export const FileDropzone = ({ id, files, onChange, describedBy }) => {
+  const { t } = useI18n();
   const [dragging, setDragging] = useState(false);
   const [rejected, setRejected] = useState([]);
 
@@ -24,11 +26,11 @@ export const FileDropzone = ({ id, files, onChange, describedBy }) => {
     const problems = [];
     for (const f of incoming) {
       if (!ACCEPTED_EXT.includes(extOf(f.name))) {
-        problems.push(`${f.name}: unsupported file type`);
+        problems.push(t("rfq.dropzone.unsupported", { name: f.name }));
       } else if (f.size > MAX_BYTES) {
-        problems.push(`${f.name}: larger than 25 MB`);
+        problems.push(t("rfq.dropzone.tooLarge", { name: f.name }));
       } else if (next.length >= MAX_FILES) {
-        problems.push(`${f.name}: limit of ${MAX_FILES} files reached`);
+        problems.push(t("rfq.dropzone.tooMany", { name: f.name, max: MAX_FILES }));
       } else if (!next.some((x) => x.name === f.name && x.size === f.size)) {
         next.push(f);
       }
@@ -60,11 +62,11 @@ export const FileDropzone = ({ id, files, onChange, describedBy }) => {
       >
         <CloudUpload size={30} className={dragging ? "text-red-600" : "text-gray-500"} aria-hidden="true" />
         <span className="text-[15px] text-gray-900">
-          <span className="font-semibold">Drag &amp; drop your design files</span> or{" "}
-          <span className="text-red-600 underline">browse</span>
+          <span className="font-semibold">{t("rfq.dropzone.drag")}</span> {t("rfq.dropzone.or")}{" "}
+          <span className="text-red-600 underline">{t("rfq.dropzone.browse")}</span>
         </span>
         <span className="text-xs text-gray-500 font-mono tracking-wide">
-          .zip · Gerber · .csv · .xlsx · .pdf — up to {MAX_FILES} files, 25 MB each
+          {t("rfq.dropzone.limits", { types: ".zip · Gerber · .csv · .xlsx · .pdf", max: MAX_FILES })}
         </span>
         <input
           id={id}
@@ -89,7 +91,7 @@ export const FileDropzone = ({ id, files, onChange, describedBy }) => {
       )}
 
       {files.length > 0 && (
-        <ul className="mt-4 divide-y divide-gray-200 border border-gray-200" aria-label="Attached files" data-testid="rfq-file-list">
+        <ul className="mt-4 divide-y divide-gray-200 border border-gray-200" aria-label={t("rfq.dropzone.attached")} data-testid="rfq-file-list">
           {files.map((f) => {
             const Icon = ["zip", "7z", "rar", "tgz", "gz"].includes(extOf(f.name)) ? FileArchive : FileText;
             return (
@@ -100,7 +102,7 @@ export const FileDropzone = ({ id, files, onChange, describedBy }) => {
                 <button
                   type="button"
                   onClick={() => onChange(files.filter((x) => x !== f))}
-                  aria-label={`Remove ${f.name}`}
+                  aria-label={t("rfq.dropzone.remove", { name: f.name })}
                   className="p-1 text-gray-500 hover:text-red-600"
                 >
                   <X size={14} />

@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "title": "Goodtron Electronics — 面向原型与小批量项目的 SMT 与 PCB 组装",
+    "description": "Goodtron Electronics — 位于加州维斯塔，为原型、ECO 改版和小批量生产提供 24–72 小时快速 SMT 与 PCB 组装。AOI 与 X 射线检测，IPC-A-610 Class 2/3，免费 BOM 与 DFA 评审。"
+  },
+  "lang": {
+    "select": "选择语言"
+  },
+  "common": {
+    "getQuote": "获取报价"
+  },
+  "site": {
+    "hours": "周一至周五 · 上午 8:00 – 下午 4:30（太平洋时间）"
+  },
+  "nav": {
+    "home": "首页",
+    "services": "服务",
+    "about": "关于我们",
+    "support": "支持",
+    "contact": "联系我们"
+  },
+  "header": {
+    "menu": "打开或关闭菜单",
+    "stripShortCta": "快速报价"
+  },
+  "quickTurn": {
+    "headline": "24–72 小时快速 SMT 与原型组装",
+    "short": "24–72 小时快速 SMT",
+    "detail": "ECO 与 Rev-A / Rev-B 改版快速交付",
+    "cta": "24 小时内获取报价"
+  },
+  "dfa": {
+    "title": "免费生产前 BOM 与 DFA 风险评审",
+    "short": "免费 BOM 与 DFA 检查",
+    "pitch": "下单前避免代价高昂的组装延误。提交您的 BOM，我们的工程团队将在 24 小时内为您提供免费的生产前 BOM 与 DFA（可装配性设计）风险评审。"
+  },
+  "footer": {
+    "tagline": "SMT 与 PCB 组装、原型制作及小批量生产 — 立足加州维斯塔。",
+    "navigate": "网站导航",
+    "contact": "联系方式"
+  },
+  "home": {
+    "callout": {
+      "before": "圣地亚哥本地 SMT 与 PCB 组装制造商 — 如有疑问请致电",
+      "after": ""
+    },
+    "hero": {
+      "overline": "电子制造 · 加州维斯塔",
+      "titleBefore": "面向",
+      "highlight1": "原型",
+      "titleMiddle": "与",
+      "highlight2": "小批量",
+      "titleAfter": "生产的 SMT 与 PCB 组装",
+      "body": "Goodtron Electronics 是一家位于美国的电子组装合作伙伴，提供 SMT 与 PCB 组装、原型制作和小批量生产服务，以快速响应的沟通和懂工程的务实支持服务客户。",
+      "detailLine": "{{detail}} — 24 小时内回复报价。",
+      "imgAlt": "专业组装的印刷电路板特写"
+    }
+  },
+  "trust": {
+    "aria": "质量标准与检测",
+    "aoi": { "label": "AOI", "micro": "自动检查贴装、极性与焊点" },
+    "xray": { "label": "X 射线", "micro": "验证 BGA / QFN 隐藏焊点" },
+    "visual": { "label": "目检", "micro": "显微镜检查细间距工艺" },
+    "ipc": { "label": "IPC-A-610", "micro": "默认 Class 2，可按要求执行 Class 3" },
+    "iso13485": { "label": "ISO 13485", "micro": "医疗器械级文档与可追溯性" },
+    "itar": { "label": "ITAR", "micro": "美国本土生产与受控数据管理" }
+  },
+  "rfq": {
+    "aria": "询价表单",
+    "errorSummary": "提交前请修正以下 {{count}} 个字段。",
+    "errors": {
+      "name": "请输入您的姓名。",
+      "emailRequired": "请输入您的工作邮箱。",
+      "emailInvalid": "请输入有效的邮箱地址，例如 you@company.com。",
+      "quantity": "请选择目标数量。",
+      "turnaround": "请选择交期。"
+    },
+    "files": {
+      "heading": "设计文件",
+      "help": "为获得准确报价，请提供：",
+      "optional": "（可选）",
+      "items": {
+        "gerber": "Gerber (RS-274X) / ODB++",
+        "bom": "BOM（含 MPN 的 CSV / Excel）",
+        "centroid": "坐标文件 / 贴片文件 (XY)",
+        "drawings": "装配图 / 备注"
+      }
+    },
+    "dropzone": {
+      "drag": "拖放设计文件",
+      "or": "或",
+      "browse": "浏览文件",
+      "limits": "{{types}} — 最多 {{max}} 个文件，每个不超过 25 MB",
+      "unsupported": "{{name}}：不支持的文件类型",
+      "tooLarge": "{{name}}：超过 25 MB",
+      "tooMany": "{{name}}：已达 {{max}} 个文件上限",
+      "attached": "已添加的文件",
+      "remove": "删除 {{name}}"
+    },
+    "build": {
+      "heading": "生产要求",
+      "quantity": "目标数量",
+      "boards": "块",
+      "turnaround": "交期",
+      "dfaAdd": "添加{{title}}（免费）",
+      "dfaDesc": "24 小时内标出停产、封装不匹配及交期风险。"
+    },
+    "turnarounds": {
+      "24h": { "label": "24 小时", "hint": "加急" },
+      "3-day": { "label": "3 天", "hint": "快速" },
+      "standard": { "label": "标准", "hint": "1–2 周" }
+    },
+    "contact": {
+      "heading": "您的信息",
+      "name": "姓名",
+      "email": "工作邮箱",
+      "company": "公司",
+      "notes": "备注",
+      "optional": "可选",
+      "notesPlaceholder": "可选 — 板尺寸、层数、BGA/0201 器件、IPC 等级、客供料或全包料等"
+    },
+    "submit": "24 小时内获取报价",
+    "sending": "发送中…",
+    "footnote": "工程师审核 · 24 小时内回复 · 无销售电话",
+    "sendError": "请求发送失败。请重试，或直接发送邮件至 {{email}}。",
+    "success": {
+      "title": "已收到您的询价，{{name}}，谢谢！",
+      "body": "工程师将审核您的请求，并在 24 小时内（工作日，{{hours}}）回复报价或问题。",
+      "filesTitle": "最后一步：请通过邮件发送 {{count}} 个文件",
+      "filesBody": "请附上以下文件发送给我们以便开始审核，并使用您填写的相同姓名。",
+      "emailFiles": "将文件发送至 {{email}}",
+      "another": "提交新的请求"
+    }
+  },
+  "quote": {
+    "title": "申请报价 — 24 小时内回复",
+    "body": "请发送 Gerber、BOM 和坐标文件，并注明目标数量与交期。欢迎原型、ECO 改版及小批量生产项目。",
+    "proof": "近期快速交付与复杂 SMT 项目",
+    "nextHeading": "后续流程",
+    "next": [
+      ["工程师审核", "您的文件由实际组装电路板的人员审核，而不是销售人员。"],
+      ["24 小时内报价或提问", "提供清晰的分项报价；如 BOM 有需确认之处，我们会提出具体问题。"],
+      ["按您的进度生产", "支持 24 小时、3 天或标准 1–2 周生产，并随时同步进度。"]
+    ],
+    "talk": "希望直接沟通？"
+  },
+  "about": {
+    "overline": "关于 Goodtron",
+    "title": "工程优先的 PCB 组装与原型制作",
+    "subtitle": "将世界一流的高速制造经验与南加州本地的快速响应能力相结合。",
+    "heroAlt": "Goodtron 加州维斯塔工厂的雅马哈 SMT 贴片线",
+    "mission": {
+      "overline": "我们的使命",
+      "title": "消除原型设计与组装现实之间的摩擦。",
+      "paragraphs": [
+        "许多硬件项目的进度，都卡在设计完成与电路板可用之间：封装与器件不匹配、BOM 中的物料已停产、十块板的原型排在一万块板的订单之后。",
+        "Goodtron 的存在就是为了弥合这一差距。每个项目都从对 BOM 和可装配性设计的工程审核开始，在我们位于加州维斯塔的自有 SMT 产线上生产，并由实际贴装元件的人员直接与您对接。"
+      ],
+      "attributes": [
+        ["加州维斯塔自有工厂", "位于圣地亚哥县北部的自有 SMT 产线，紧邻南加州硬件团队。"],
+        ["24–72 小时快速交付", "原型与 ECO 改版以天计，而非以周计。"],
+        ["工程优先审核", "在采购元件和生产之前，免费进行 BOM 与 DFA 预检。"],
+        ["专注原型与小批量", "小批量是我们的核心业务，绝不会被大订单挤占。"]
+      ]
+    },
+    "leader": {
+      "overline": "领导团队",
+      "heading": "认识创始人",
+      "name": "Daley Chak",
+      "title": "创始人兼技术运营负责人",
+      "photoLabel": "Daley Chak 照片（即将上线）",
+      "bio": [
+        "Daley 是一位资深电子制造专家，职业经历横跨全球硬件制造中心中国深圳与南加州科技生态圈。",
+        "Daley 在表面贴装技术（SMT）、雅马哈 SMT 平台的高速贴片操作、细间距 BGA 与 0201 贴装以及严格的组装质量标准方面拥有丰富的实操经验。",
+        "Daley 直接与硬件工程师、机器人开发者和医疗器械创新者合作，帮助设计从原理图顺利走向实物组装，避免代价高昂的改版。"
+      ],
+      "expertise": "专业领域",
+      "tags": [
+        "深圳供应链与制造资深专家",
+        "SMT 与 DFA 优化",
+        "雅马哈高速 SMT 专家",
+        "直接工程支持"
+      ]
+    },
+    "values": {
+      "overline": "为什么选择 Goodtron",
+      "heading": "您可以信赖的承诺",
+      "items": [
+        ["与工程师直接沟通", "没有销售中间人 — 直接与组装您电路板的制造专家沟通。"],
+        ["快速交付的灵活性", "位于加州本地的工厂，专为快速迭代和 ECO 改版而建。"],
+        ["零缺陷承诺", "每个项目均采用 AOI 与 X 射线检测，并符合 IPC-A-610 Class 2/3 标准。"]
+      ]
+    },
+    "cta": {
+      "title": "直接与为您组装电路板的人沟通。",
+      "body": "发送文件获取报价或免费 BOM 与 DFA 评审 — 工程师将在 24 小时内回复。"
+    }
+  }
+}

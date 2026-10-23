@@ -3,11 +3,15 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowUpRight, Zap } from "lucide-react";
 import { NAV, QUICK_TURN } from "@/lib/site";
 import { Logo } from "@/components/Logo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useI18n } from "@/i18n";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { t } = useI18n();
+  const navLabel = (item) => t(`nav.${item.key}`, { defaultValue: item.label });
 
   // Custom active-state resolver so hash-anchor items (e.g. Support -> /#support)
   // don't light up whenever pathname is "/". Hash items are only active when the
@@ -47,39 +51,42 @@ export const Header = () => {
           <p className="flex items-center gap-2 min-w-0">
             <Zap size={14} className="text-red-500 shrink-0" aria-hidden="true" />
             <strong className="font-semibold truncate">
-              <span className="sm:hidden">{QUICK_TURN.short}</span>
-              <span className="hidden sm:inline">{QUICK_TURN.headline}</span>
+              <span className="sm:hidden">{t("quickTurn.short", { defaultValue: QUICK_TURN.short })}</span>
+              <span className="hidden sm:inline">{t("quickTurn.headline", { defaultValue: QUICK_TURN.headline })}</span>
             </strong>
-            <span className="hidden xl:inline text-gray-400">· {QUICK_TURN.detail}</span>
+            <span className="hidden xl:inline text-gray-400">· {t("quickTurn.detail", { defaultValue: QUICK_TURN.detail })}</span>
           </p>
-          <Link
-            to="/quote"
-            data-testid="quick-turn-strip-cta"
-            className="shrink-0 inline-flex items-center gap-1 font-semibold text-red-400 hover:text-white transition-colors"
-          >
-            <span className="sm:hidden">Fast Quote</span>
-            <span className="hidden sm:inline">{QUICK_TURN.cta}</span>
-            <ArrowUpRight size={14} aria-hidden="true" />
-          </Link>
+          <div className="shrink-0 flex items-center gap-5">
+            <LanguageSwitcher dark className="hidden lg:flex" />
+            <Link
+              to="/quote"
+              data-testid="quick-turn-strip-cta"
+              className="shrink-0 inline-flex items-center gap-1 font-semibold text-red-400 hover:text-white transition-colors"
+            >
+              <span className="sm:hidden">{t("header.stripShortCta")}</span>
+              <span className="hidden sm:inline">{t("quickTurn.cta", { defaultValue: QUICK_TURN.cta })}</span>
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Logo />
 
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
             {NAV.filter((n) => n.to !== "/").map((item) => {
               const active = isNavActive(item.to);
               return (
                 <Link
                   key={item.to}
                   to={item.to}
-                  data-testid={`nav-${item.label.toLowerCase()}`}
-                  className={`text-sm font-medium transition-colors ${
+                  data-testid={`nav-${item.key}`}
+                  className={`text-sm font-medium whitespace-nowrap transition-colors ${
                     active ? "text-red-600" : "text-gray-700 hover:text-gray-900"
                   }`}
                 >
-                  {item.label}
+                  {navLabel(item)}
                 </Link>
               );
             })}
@@ -89,16 +96,17 @@ export const Header = () => {
             <Link
               to="/quote"
               data-testid="header-cta-quote"
-              className="btn-primary text-sm"
+              className="btn-primary text-sm whitespace-nowrap"
             >
-              Get a Fast Quote
+              {t("common.getQuote")}
               <ArrowUpRight size={16} />
             </Link>
           </div>
 
           <button
             data-testid="mobile-menu-toggle"
-            aria-label="Toggle menu"
+            aria-label={t("header.menu")}
+            aria-expanded={open}
             className="lg:hidden p-2 text-gray-900"
             onClick={() => setOpen((o) => !o)}
           >
@@ -124,21 +132,22 @@ export const Header = () => {
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }
                   }}
-                  data-testid={`mobile-nav-${item.label.toLowerCase()}`}
+                  data-testid={`mobile-nav-${item.key}`}
                   className={`py-3 border-b border-gray-100 text-base font-medium ${
                     active ? "text-red-600" : "text-gray-800"
                   }`}
                 >
-                  {item.label}
+                  {navLabel(item)}
                 </Link>
               );
             })}
+            <LanguageSwitcher className="mt-4" testId="mobile-lang-switcher" />
             <Link
               to="/quote"
               data-testid="mobile-cta-quote"
               className="btn-primary mt-4 justify-center"
             >
-              {QUICK_TURN.cta}
+              {t("quickTurn.cta", { defaultValue: QUICK_TURN.cta })}
             </Link>
           </div>
         </div>

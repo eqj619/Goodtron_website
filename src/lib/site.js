@@ -11,11 +11,13 @@ export const SITE = {
     "Responsive PCB Assembly & SMT support for prototype and low-volume projects.",
 };
 
+// `key` selects the translated label (nav.<key>) and the data-testid.
 export const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
-  { to: "/#support", label: "Support" },
-  { to: "/contact", label: "Contact Us" },
+  { to: "/", key: "home", label: "Home" },
+  { to: "/services", key: "services", label: "Services" },
+  { to: "/about", key: "about", label: "About Us" },
+  { to: "/#support", key: "support", label: "Support" },
+  { to: "/contact", key: "contact", label: "Contact Us" },
 ];
 
 export const PCB_IMAGES = {
@@ -266,10 +268,10 @@ export const DFA_REVIEW = {
 };
 
 export const RFQ_FILES = [
-  { label: "Gerber (RS-274X) / ODB++", required: true },
-  { label: "BOM (CSV/Excel with MPN)", required: true },
-  { label: "Centroid / Pick & Place (XY)", required: true },
-  { label: "Assembly Drawings / Notes", required: false },
+  { key: "gerber", label: "Gerber (RS-274X) / ODB++", required: true },
+  { key: "bom", label: "BOM (CSV/Excel with MPN)", required: true },
+  { key: "centroid", label: "Centroid / Pick & Place (XY)", required: true },
+  { key: "drawings", label: "Assembly Drawings / Notes", required: false },
 ];
 
 export const RFQ_QUANTITIES = ["1–5", "5–25", "25–100", "100+"];

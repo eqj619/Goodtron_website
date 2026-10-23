@@ -22,6 +22,7 @@ import { TrustBar } from "@/components/QualityBadges";
 import { DfaReviewBanner } from "@/components/DfaReviewBanner";
 import { CaseStudies } from "@/components/CaseStudies";
 import { RfqForm } from "@/components/RfqForm";
+import { useI18n } from "@/i18n";
 
 const CORE_SERVICES = [
   {
@@ -86,6 +87,7 @@ const WHY = [
 ];
 
 export default function Home() {
+  const { t } = useI18n();
   return (
     <div data-testid="page-home">
       {/* TOP CALL-OUT STRIP */}
@@ -96,7 +98,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[15px] text-black font-medium">
             <span data-testid="home-callout-tagline" className="text-black">
-              Direct SMT &amp; PCB Assembly Manufacturer in San Diego — call
+              {t("home.callout.before")}
             </span>
             <a
               href="tel:+19098715566"
@@ -106,7 +108,7 @@ export default function Home() {
               <Phone size={14} />
               909-871-5566
             </a>
-            <span className="text-black">for any question</span>
+            <span className="text-black">{t("home.callout.after")}</span>
           </div>
         </div>
       </div>
@@ -118,37 +120,36 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
             <div className="lg:col-span-6 gt-reveal">
               <div className="text-sm md:text-base tracking-widest text-red-600 uppercase font-bold mb-5">
-                Electronics Manufacturing · Vista, CA
+                {t("home.hero.overline")}
               </div>
               <p
                 data-testid="hero-quick-turn"
                 className="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 text-sm sm:text-[15px] font-bold mb-7"
               >
                 <Zap size={16} aria-hidden="true" />
-                {QUICK_TURN.headline}
+                {t("quickTurn.headline", { defaultValue: QUICK_TURN.headline })}
               </p>
               <h1 className="font-display text-[44px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-semibold text-gray-900">
-                SMT &amp; PCB Assembly for{" "}
-                <span className="text-red-600">Prototype</span> and{" "}
-                <span className="text-red-600">Low-Volume</span> Production.
+                {t("home.hero.titleBefore")}
+                <span className="text-red-600">{t("home.hero.highlight1")}</span>
+                {t("home.hero.titleMiddle")}
+                <span className="text-red-600">{t("home.hero.highlight2")}</span>
+                {t("home.hero.titleAfter")}
               </h1>
               <p className="mt-8 text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
-                Goodtron Electronics is a U.S.-based electronics assembly
-                partner offering SMT and PCB assembly, prototype builds, and
-                small-batch production — with responsive communication and
-                practical, engineering-aware project support.
+                {t("home.hero.body")}
               </p>
               <div className="mt-10 flex flex-wrap gap-3">
                 <Link to="/quote" data-testid="hero-cta-quote" className="btn-primary">
-                  {QUICK_TURN.cta} <ArrowUpRight size={16} />
+                  {t("quickTurn.cta", { defaultValue: QUICK_TURN.cta })} <ArrowUpRight size={16} />
                 </Link>
                 <Link to="/quote?review=dfa" data-testid="hero-cta-dfa" className="btn-secondary">
-                  {DFA_REVIEW.short} <ArrowRight size={16} />
+                  {t("dfa.short", { defaultValue: DFA_REVIEW.short })} <ArrowRight size={16} />
                 </Link>
               </div>
               <p className="mt-5 flex items-center gap-2 text-sm text-gray-600">
                 <Timer size={15} className="text-red-600" aria-hidden="true" />
-                {QUICK_TURN.detail} — quotes back within 24 hours.
+                {t("home.hero.detailLine", { detail: t("quickTurn.detail", { defaultValue: QUICK_TURN.detail }) })}
               </p>
             </div>
 
@@ -156,7 +157,7 @@ export default function Home() {
               <div className="relative border border-gray-200">
                 <img
                   src={PCB_IMAGES.hero}
-                  alt="Close-up of a professionally assembled printed circuit board"
+                  alt={t("home.hero.imgAlt")}
                   className="w-full h-[400px] lg:h-[520px] object-cover"
                 />
               </div>

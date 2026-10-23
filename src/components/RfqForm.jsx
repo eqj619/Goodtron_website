@@ -3,6 +3,7 @@ import { ArrowUpRight, AlertCircle, CheckCircle2, Check, Mail, ShieldCheck } fro
 import { submitQuote, submitRfqWithFiles, rfqUploadEnabled } from "@/lib/api";
 import { SITE, RFQ_FILES, RFQ_QUANTITIES, RFQ_TURNAROUNDS, DFA_REVIEW } from "@/lib/site";
 import { FileDropzone, formatBytes } from "@/components/FileDropzone";
+import { useI18n } from "@/i18n";
 
 const fieldBase =
   "mt-2 w-full border rounded-none bg-white px-4 py-3 text-[15px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600/20";
@@ -11,13 +12,14 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const EMPTY = { name: "", email: "", company: "", quantity: "", turnaround: "", notes: "" };
 
+// Values are message keys under rfq.errors.
 const validate = (form) => {
   const errors = {};
-  if (!form.name.trim()) errors.name = "Enter your name.";
-  if (!form.email.trim()) errors.email = "Enter your work email.";
-  else if (!EMAIL_RE.test(form.email.trim())) errors.email = "Enter a valid email address, e.g. you@company.com.";
-  if (!form.quantity) errors.quantity = "Choose a target quantity.";
-  if (!form.turnaround) errors.turnaround = "Choose a turnaround.";
+  if (!form.name.trim()) errors.name = "name";
+  if (!form.email.trim()) errors.email = "emailRequired";
+  else if (!EMAIL_RE.test(form.email.trim())) errors.email = "emailInvalid";
+  if (!form.quantity) errors.quantity = "quantity";
+  if (!form.turnaround) errors.turnaround = "turnaround";
   return errors;
 };
 
@@ -62,6 +64,7 @@ const ChoiceGroup = ({ name, legend, options, value, onChange, error, errorId })
 );
 
 export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
+  const { t } = useI18n();
   const uid = useId();
   const id = (k) => `${uid}-${k}`;
   const formRef = useRef(null);
@@ -125,9 +128,7 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
       const detail = err?.response?.data?.detail;
       setStatus({
         state: "error",
-        msg: detail
-          ? String(detail)
-          : `We couldn't send your request. Please try again, or email ${SITE.email} directly.`,
+        msg: detail ? String(detail) : t("rfq.sendError", { email: SITE.email }),
       });
     }
   };
@@ -139,17 +140,14 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
         <div className="flex items-start gap-3">
           <CheckCircle2 size={22} className="text-green-700 shrink-0 mt-0.5" aria-hidden="true" />
           <div>
-            <h3 className="text-xl font-semibold text-gray-900">RFQ received — thank you, {sent.name}.</h3>
+            <h3 className="text-xl font-semibold text-gray-900">{t("rfq.success.title", { name: sent.name })}</h3>
             <p className="mt-2 text-[15px] text-gray-700 leading-relaxed">
-              An engineer will review your request and reply with a quote or questions within 24 hours
-              (business days, {SITE.hours}).
+              {t("rfq.success.body", { hours: t("site.hours", { defaultValue: SITE.hours }) })}
             </p>
             {pending.length > 0 && (
               <div className="mt-6 border border-gray-300 bg-white p-5">
-                <div className="font-semibold text-gray-900">Last step: email your {pending.length} file{pending.length > 1 ? "s" : ""}</div>
-                <p className="mt-1 text-sm text-gray-600">
-                  Reply with these attached so we can start the review — use the same name you entered.
-                </p>
+                <div className="font-semibold text-gray-900">{t("rfq.success.filesTitle", { count: pending.length })}</div>
+                <p className="mt-1 text-sm text-gray-600">{t("rfq.success.filesBody")}</p>
                 <ul className="mt-3 text-sm font-mono text-gray-800 space-y-1">
                   {pending.map((f) => (
                     <li key={f.name + f.size}>{f.name}</li>
@@ -159,7 +157,7 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
                   href={`mailto:${SITE.email}?subject=${encodeURIComponent(`RFQ files — ${sent.name}`)}`}
                   className="btn-primary mt-4 text-sm"
                 >
-                  <Mail size={14} /> Email files to {SITE.email}
+                  <Mail size={14} /> {t("rfq.success.emailFiles", { email: SITE.email })}
                 </a>
               </div>
             )}
@@ -168,7 +166,7 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
               onClick={() => setStatus({ state: "idle", msg: "" })}
               className="mt-6 text-sm text-gray-700 underline hover:text-red-600"
             >
-              Submit another request
+              {t("rfq.success.another")}
             </button>
           </div>
         </div>
@@ -181,7 +179,7 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
   const errText = (k) =>
     errors[k] && (
       <p id={id(`${k}-error`)} className="mt-2 text-sm text-red-700 flex items-center gap-1.5">
-        <AlertCircle size={14} aria-hidden="true" /> {errors[k]}
+        <AlertCircle size={14} aria-hidden="true" /> {t(`rfq.errors.${errors[k]}`)}
       </p>
     );
 
@@ -191,25 +189,23 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
       onSubmit={submit}
       noValidate
       data-testid={testId}
-      aria-label="Request for quote"
+      aria-label={t("rfq.aria")}
       className="border border-gray-200 bg-white p-6 lg:p-10"
     >
       {status.state === "invalid" && errorCount > 0 && (
         <div role="alert" className="mb-8 flex items-start gap-3 border border-red-600 bg-red-50 p-4 text-sm text-red-700">
           <AlertCircle size={16} className="shrink-0 mt-0.5" aria-hidden="true" />
-          <div>
-            Please fix {errorCount} field{errorCount > 1 ? "s" : ""} below before sending your RFQ.
-          </div>
+          <div>{t("rfq.errorSummary", { count: errorCount })}</div>
         </div>
       )}
 
       {/* 1 · Files */}
       <section aria-labelledby={id("files-h")}>
         <h3 id={id("files-h")} className="font-display text-xl font-semibold text-gray-900">
-          <span className="font-mono text-red-600 mr-2">01</span>Design files
+          <span className="font-mono text-red-600 mr-2">01</span>{t("rfq.files.heading")}
         </h3>
         <p id={id("files-help")} className="mt-1 text-sm text-gray-600">
-          For an accurate quote, include:
+          {t("rfq.files.help")}
         </p>
         <ul className="mt-3 flex flex-wrap gap-2" data-testid="rfq-file-checklist">
           {RFQ_FILES.map((f) => (
@@ -220,8 +216,8 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
               }`}
             >
               <Check size={13} className={f.required ? "text-red-600" : "text-gray-400"} aria-hidden="true" />
-              {f.label}
-              {!f.required && <span className="text-gray-500">(optional)</span>}
+              {t(`rfq.files.items.${f.key}`, { defaultValue: f.label })}
+              {!f.required && <span className="text-gray-500">{t("rfq.files.optional")}</span>}
             </li>
           ))}
         </ul>
@@ -233,25 +229,29 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
       {/* 2 · Build */}
       <section aria-labelledby={id("build-h")} className="mt-10 pt-8 border-t border-gray-200">
         <h3 id={id("build-h")} className="font-display text-xl font-semibold text-gray-900">
-          <span className="font-mono text-red-600 mr-2">02</span>Build requirements
+          <span className="font-mono text-red-600 mr-2">02</span>{t("rfq.build.heading")}
         </h3>
         <div className="mt-5 space-y-6">
           <ChoiceGroup
             name="quantity"
-            legend="Target quantity"
-            options={RFQ_QUANTITIES.map((q) => ({ value: q, label: q, hint: "boards" }))}
+            legend={t("rfq.build.quantity")}
+            options={RFQ_QUANTITIES.map((q) => ({ value: q, label: q, hint: t("rfq.build.boards") }))}
             value={form.quantity}
             onChange={set("quantity")}
-            error={errors.quantity}
+            error={errors.quantity && t(`rfq.errors.${errors.quantity}`)}
             errorId={id("quantity-error")}
           />
           <ChoiceGroup
             name="turnaround"
-            legend="Turnaround urgency"
-            options={RFQ_TURNAROUNDS}
+            legend={t("rfq.build.turnaround")}
+            options={RFQ_TURNAROUNDS.map((o) => ({
+              value: o.value,
+              label: t(`rfq.turnarounds.${o.value}.label`, { defaultValue: o.label }),
+              hint: t(`rfq.turnarounds.${o.value}.hint`, { defaultValue: o.hint }),
+            }))}
             value={form.turnaround}
             onChange={set("turnaround")}
-            error={errors.turnaround}
+            error={errors.turnaround && t(`rfq.errors.${errors.turnaround}`)}
             errorId={id("turnaround-error")}
           />
           <label
@@ -267,10 +267,10 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
             <span>
               <span className="flex items-center gap-2 font-semibold text-gray-900">
                 <ShieldCheck size={16} className="text-red-600" aria-hidden="true" />
-                Add a {DFA_REVIEW.title} — free
+                {t("rfq.build.dfaAdd", { title: t("dfa.title", { defaultValue: DFA_REVIEW.title }) })}
               </span>
               <span className="block mt-1 text-sm text-gray-600">
-                Obsolescence, footprint mismatch, and lead-time risks flagged within 24 hours.
+                {t("rfq.build.dfaDesc")}
               </span>
             </span>
           </label>
@@ -280,11 +280,11 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
       {/* 3 · Contact */}
       <section aria-labelledby={id("contact-h")} className="mt-10 pt-8 border-t border-gray-200">
         <h3 id={id("contact-h")} className="font-display text-xl font-semibold text-gray-900">
-          <span className="font-mono text-red-600 mr-2">03</span>Your details
+          <span className="font-mono text-red-600 mr-2">03</span>{t("rfq.contact.heading")}
         </h3>
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor={id("name")} className={labelCls}>Name *</label>
+            <label htmlFor={id("name")} className={labelCls}>{t("rfq.contact.name")} *</label>
             <input
               id={id("name")}
               data-field="name"
@@ -300,7 +300,7 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
             {errText("name")}
           </div>
           <div>
-            <label htmlFor={id("email")} className={labelCls}>Work email *</label>
+            <label htmlFor={id("email")} className={labelCls}>{t("rfq.contact.email")} *</label>
             <input
               id={id("email")}
               type="email"
@@ -318,25 +318,25 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
             {errText("email")}
           </div>
           <div className="md:col-span-2">
-            <label htmlFor={id("company")} className={labelCls}>Company</label>
+            <label htmlFor={id("company")} className={labelCls}>{t("rfq.contact.company")}</label>
             <input
               id={id("company")}
               data-testid="rfq-company"
               autoComplete="organization"
               value={form.company}
               onChange={(e) => set("company")(e.target.value)}
-              placeholder="Optional"
+              placeholder={t("rfq.contact.optional")}
               className={fieldCls("company")}
             />
           </div>
           <div className="md:col-span-2">
-            <label htmlFor={id("notes")} className={labelCls}>Notes</label>
+            <label htmlFor={id("notes")} className={labelCls}>{t("rfq.contact.notes")}</label>
             <textarea
               id={id("notes")}
               data-testid="rfq-notes"
               value={form.notes}
               onChange={(e) => set("notes")(e.target.value)}
-              placeholder="Optional — board size, layer count, BGA/0201 parts, IPC class, consigned vs. turnkey parts…"
+              placeholder={t("rfq.contact.notesPlaceholder")}
               className={`${fieldCls("notes")} min-h-[110px] resize-y`}
             />
           </div>
@@ -361,11 +361,11 @@ export const RfqForm = ({ defaultDfa = false, testId = "rfq-form" }) => {
           disabled={status.state === "loading"}
           className="btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {status.state === "loading" ? "Sending…" : "Get My Quote in 24h"}
+          {status.state === "loading" ? t("rfq.sending") : t("rfq.submit")}
           <ArrowUpRight size={16} />
         </button>
         <span className="text-xs text-gray-500 font-mono tracking-wider">
-          Engineer-reviewed · Reply within 24h · No sales calls
+          {t("rfq.footnote")}
         </span>
       </div>
     </form>
