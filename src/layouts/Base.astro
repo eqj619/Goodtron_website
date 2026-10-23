@@ -1,0 +1,72 @@
+---
+import "@/index.css";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { LANGUAGES, DEFAULT_LANG, PREF_STORAGE_KEY, getI18n, localePath } from "@/i18n/core";
+
+interface Props {
+  lang: string;
+  /** Route path without the language prefix, e.g. "/about". */
+  path: string;
+  title?: string;
+  description?: string;
+  /** Skip the saved-language redirect (404 page). */
+  noPrefRedirect?: boolean;
+}
+
+const { lang, path, title, description, noPrefRedirect = false } = Astro.props;
+const { t, htmlLang } = getI18n(lang);
+const pageTitle = title ? `${title} | Goodtron Electronics` : t("meta.title");
+const pageDescription = description ?? t("meta.description");
+const site = Astro.site;
+const canonical = new URL(localePath(lang, path), site).href;
+---
+
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    {
+      !noPrefRedirect &&
+        LANGUAGES.map((l) => (
+          <link rel="alternate" hreflang={l.htmlLang} href={new URL(localePath(l.code, path), site).href} />
+        ))
+    }
+    {!noPrefRedirect && <link rel="alternate" hreflang="x-default" href={new URL(localePath(DEFAULT_LANG, path), site).href} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Goodtron Electronics" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/assets/pcb-3.jpg", site).href} />
+    <meta property="og:locale" content={htmlLang.replace("-", "_")} />
+    <link rel="icon" type="image/png" href="/assets/logo-mark.png?v=6" />
+    {
+      lang === DEFAULT_LANG && !noPrefRedirect && (
+        <script is:inline define:vars={{ key: PREF_STORAGE_KEY }}>
+          // A visitor who picked 日本語 / 中文 earlier lands on the English URL → send them to their language.
+          try {
+            var pref = localStorage.getItem(key);
+            if (pref === "ja" || pref === "zh") {
+              location.replace("/" + pref + location.pathname + location.search + location.hash);
+            }
+          } catch (e) {}
+        </script>
+      )
+    }
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col bg-white">
+      <Header lang={lang} path={path} />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer lang={lang} />
+    </div>
+  </body>
+</html>

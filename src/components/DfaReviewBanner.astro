@@ -1,0 +1,58 @@
+---
+import { ArrowUpRight, CalendarClock, PackageSearch, Ruler, Clock } from "lucide-react";
+import { DFA_REVIEW } from "@/lib/site";
+import { localePath } from "@/i18n/core";
+
+// English only.
+const { lang } = Astro.props;
+const BENEFIT_ICONS = [CalendarClock, Ruler, PackageSearch];
+---
+
+<section
+  id="dfa-review"
+  aria-labelledby="dfa-review-title"
+  data-testid="section-dfa-review"
+  lang={lang !== "en" ? "en" : undefined}
+  class="relative overflow-hidden bg-[#0A0A0A] text-white scroll-mt-32"
+>
+  <div class="absolute inset-0 gt-grid-bg-dark opacity-40 pointer-events-none"></div>
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6">
+        <div class="inline-flex items-center gap-2 border border-red-500 text-red-400 px-3 py-1 text-xs font-bold uppercase tracking-widest">
+          Free · No order required
+        </div>
+        <h2 id="dfa-review-title" class="mt-6 font-display text-3xl lg:text-[44px] tracking-tight font-semibold leading-[1.1]">
+          {DFA_REVIEW.title}
+        </h2>
+        <p class="mt-5 text-lg text-gray-300 leading-relaxed">{DFA_REVIEW.pitch}</p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href={localePath(lang, "/dfa-review")} data-testid="dfa-cta" class="btn-primary">
+            {DFA_REVIEW.cta} <ArrowUpRight size={16} />
+          </a>
+          <span class="inline-flex items-center gap-2 text-sm text-gray-400">
+            <Clock size={14} aria-hidden="true" /> Results within 24 hours
+          </span>
+        </div>
+      </div>
+      <ul class="lg:col-span-6 grid grid-cols-1 gap-px bg-white/10 border border-white/10">
+        {
+          DFA_REVIEW.benefits.map((b, i) => {
+            const Icon = BENEFIT_ICONS[i];
+            return (
+              <li class="bg-[#0A0A0A] p-6 flex items-start gap-4">
+                <div class="w-10 h-10 shrink-0 border border-white/20 flex items-center justify-center text-red-500">
+                  <Icon size={18} aria-hidden="true" />
+                </div>
+                <div>
+                  <div class="font-semibold text-white">{b.t}</div>
+                  <div class="mt-1 text-[15px] text-gray-400 leading-relaxed">{b.d}</div>
+                </div>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</section>

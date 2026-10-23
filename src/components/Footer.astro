@@ -1,0 +1,71 @@
+---
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { NAV, SITE } from "@/lib/site";
+import { getI18n } from "@/i18n/core";
+
+const { lang } = Astro.props;
+const { t, href } = getI18n(lang);
+---
+
+<footer data-testid="site-footer" class="bg-[#0A0A0A] text-gray-300 border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-14 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+      <div class="md:col-span-6">
+        <div class="flex items-center gap-3">
+          <img src="/assets/logo-mark.png?v=6" alt="" aria-hidden="true" class="h-11 w-auto" />
+          <div class="font-display text-2xl font-bold tracking-tight">
+            <span style="color: #DC2626">GOODTRON</span>{" "}
+            <span class="text-white text-sm font-medium">Electronics</span>
+          </div>
+        </div>
+        <p class="mt-5 text-gray-400 text-[15px] leading-relaxed max-w-md">{t("footer.tagline")}</p>
+      </div>
+
+      <div class="md:col-span-3">
+        <div class="text-sm md:text-[15px] tracking-widest text-red-500 uppercase font-bold mb-4">{t("footer.navigate")}</div>
+        <ul class="space-y-2 text-[15px]">
+          {
+            NAV.map((n) => (
+              <li>
+                <a href={href(n.to)} data-testid={`footer-link-${n.key}`} class="text-gray-400 hover:text-white transition-colors">
+                  {t(`nav.${n.key}`, { defaultValue: n.label })}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="md:col-span-3">
+        <div class="text-sm md:text-[15px] tracking-widest text-red-500 uppercase font-bold mb-4">{t("footer.contact")}</div>
+        <ul class="space-y-3 text-[14px]">
+          <li>
+            <a href={`mailto:${SITE.email}`} data-testid="footer-email" class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+              <Mail size={14} className="text-red-500" aria-hidden="true" />
+              {SITE.email}
+            </a>
+          </li>
+          <li>
+            <a href={`tel:${SITE.phoneHref}`} data-testid="footer-phone" class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+              <Phone size={14} className="text-red-500" aria-hidden="true" />
+              {SITE.phone}
+            </a>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300" data-testid="footer-address">
+            <MapPin size={14} className="text-red-500 mt-1 shrink-0" aria-hidden="true" />
+            <span>{SITE.address}</span>
+          </li>
+          <li class="flex items-start gap-2 text-gray-300" data-testid="footer-hours">
+            <Clock size={14} className="text-red-500 mt-1 shrink-0" aria-hidden="true" />
+            <span>{t("site.hours", { defaultValue: SITE.hours })}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-gray-500">
+      <div>{t("footer.rights", { year: new Date().getFullYear() })}</div>
+      <div class="font-mono tracking-wider">PCB · SMT · PROTOTYPE · LOW-VOLUME</div>
+    </div>
+  </div>
+</footer>

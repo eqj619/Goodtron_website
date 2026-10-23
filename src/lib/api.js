@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+// Unset in development so local test submissions never reach production.
+const BACKEND_URL =
+  import.meta.env.PUBLIC_BACKEND_URL ?? (import.meta.env.PROD ? "https://goodtronsmt.com" : "");
 export const API = `${BACKEND_URL}/api`;
 
 export const api = axios.create({
@@ -15,7 +17,7 @@ export const submitApplication = (payload) => api.post("/careers", payload).then
 // Optional multipart endpoint for RFQ file uploads. The current backend only
 // accepts JSON, so without this the RFQ form lists files and asks the customer
 // to email them after submitting.
-const RFQ_UPLOAD_URL = process.env.REACT_APP_RFQ_UPLOAD_URL;
+const RFQ_UPLOAD_URL = import.meta.env.PUBLIC_RFQ_UPLOAD_URL;
 export const rfqUploadEnabled = Boolean(RFQ_UPLOAD_URL);
 
 export const submitRfqWithFiles = (payload, files) => {

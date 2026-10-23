@@ -1,0 +1,51 @@
+---
+import { Globe } from "lucide-react";
+import { LANGUAGES, getI18n, localePath } from "@/i18n/core";
+
+interface Props {
+  lang: string;
+  path: string;
+  dark?: boolean;
+  class?: string;
+  testId?: string;
+}
+
+const { lang, path, dark = false, class: className = "", testId = "lang-switcher" } = Astro.props;
+const { t } = getI18n(lang);
+---
+
+<nav aria-label={t("lang.select")} data-testid={testId} class:list={["flex items-center gap-1.5", className]}>
+  <Globe size={15} className={`shrink-0 ${dark ? "text-gray-400" : "text-gray-500"}`} aria-hidden="true" />
+  <ul class:list={["flex border", dark ? "border-white/25" : "border-gray-300"]}>
+    {
+      LANGUAGES.map((l) => {
+        const active = l.code === lang;
+        return (
+          <li>
+            <a
+              href={localePath(l.code, path)}
+              hreflang={l.htmlLang}
+              lang={l.htmlLang}
+              aria-current={active ? "true" : undefined}
+              aria-label={l.name}
+              data-lang-pref={l.code}
+              data-testid={`${testId}-${l.code}`}
+              class:list={[
+                "block px-2.5 py-1 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600/40",
+                dark
+                  ? active
+                    ? "bg-white text-gray-900"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
+                  : active
+                    ? "bg-gray-900 text-white"
+                    : "bg-white text-gray-700 hover:bg-gray-100",
+              ]}
+            >
+              {l.label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
