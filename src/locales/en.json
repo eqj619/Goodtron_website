@@ -167,5 +167,123 @@
       "title": "Talk to the people who will build your boards.",
       "body": "Send your files for a quote or a free BOM & DFA review — an engineer replies within 24 hours."
     }
+  },
+  "services": {
+    "hero": {
+      "overline": "Services",
+      "titleBefore": "Electronics assembly services built around ",
+      "highlight": "your project",
+      "titleAfter": ", not a production queue.",
+      "body": "Goodtron Electronics is a small, founder-led shop focused on SMT and PCB assembly for prototype and low-volume production. Below are the services we deliver in-house from Vista, California.",
+      "browse": "Browse Services"
+    },
+    "serviceTag": "Service {{tag}}",
+    "serviceTagDot": "Service · {{tag}}",
+    "startQuote": "Start a quote for {{title}}",
+    "blocks": {
+      "smt-assembly": {
+        "title": "SMT Assembly",
+        "intro": "Surface-mount assembly for modern board designs — from 0402 passives through fine-pitch ICs. Handled with careful setup, documented process notes, and post-reflow inspection.",
+        "bullets": [
+          "0402 passives through fine-pitch ICs",
+          "DEK stencil printing for solder paste",
+          "Lead-free reflow soldering",
+          "Documented setup and process notes",
+          "Post-reflow visual inspection"
+        ],
+        "imgAlt": "Close-up of a densely populated SMT board with fine-pitch components"
+      },
+      "pcb-assembly": {
+        "title": "PCB Assembly",
+        "intro": "Full PCBA support — from receiving your BOM and Gerber files to shipping a working, inspected board. We review carefully up front, so you don't get surprises later.",
+        "bullets": [
+          "BOM validation & footprint sanity checks",
+          "Long-lead part flagging on quote",
+          "Mixed SMT + through-hole builds",
+          "Visual inspection on every board",
+          "Clear traveler documentation"
+        ],
+        "imgAlt": "Fully assembled printed circuit board with populated components"
+      },
+      "prototype-builds": {
+        "title": "Prototype Builds",
+        "intro": "First-article and early-revision prototypes handled seriously — the same review, sourcing, and inspection process we apply to larger runs.",
+        "bullets": [
+          "Single-board and small first-article runs",
+          "Fast iteration between rev A → rev B",
+          "Engineering-aware questions on your BOM",
+          "Honest feedback on manufacturability"
+        ],
+        "imgAlt": "Prototype board with jumper wires and multimeter during an early build"
+      },
+      "low-volume-production": {
+        "title": "Low-Volume Production",
+        "intro": "Consistent small and mid-volume runs — the same process notes, documentation, and inspection on every board, so quality stays repeatable as you scale.",
+        "bullets": [
+          "Small and mid-batch production",
+          "Repeatable process notes & travelers",
+          "Coordinated build planning",
+          "Visual inspection & final QC"
+        ],
+        "imgAlt": "Close-up of a production-quality assembled PCB with a large IC in focus"
+      },
+      "through-hole-mixed": {
+        "title": "Through-Hole & Mixed-Technology Support",
+        "intro": "Mixed and hand-soldered assembly — connectors, power components, and boards that combine SMT with through-hole parts on the same build.",
+        "bullets": [
+          "Hand-soldered through-hole assembly",
+          "Mixed SMT + THT builds",
+          "Hot-air rework on populated boards",
+          "Microscope inspection for fine-pitch"
+        ],
+        "imgAlt": "Hand soldering a through-hole component onto a populated PCB"
+      }
+    },
+    "quality": {
+      "overline": "Quality & Inspection",
+      "title": "Every board inspected. Standards you can specify.",
+      "body": "Prototype speed doesn't mean skipping inspection. Tell us the class and compliance context on your RFQ and we build and inspect to it.",
+      "groups": {
+        "Inspection": "Inspection",
+        "Standards": "Standards"
+      }
+    },
+    "equipment": {
+      "overline": "Production Capability",
+      "title": "Our SMT line & equipment.",
+      "body": "The equipment behind the services above — flexible enough for small prototype runs and repeatable enough for low-volume production.",
+      "items": {
+        "yamaha-ys12": {
+          "name": "Yamaha YS12",
+          "role": "Mid-speed SMT placement",
+          "body": "Handles a broad component range from 0402 passives to fine-pitch ICs — well-suited to prototype and low-volume PCB assembly runs.",
+          "alt": "Yamaha YS12 SMT placement machine"
+        },
+        "yamaha-ys12f": {
+          "name": "Yamaha YS12F",
+          "role": "Flexible SMT placement",
+          "body": "Second placement head paired with the YS12 to support mixed builds and give us flexibility across different board sizes and setups.",
+          "alt": "Yamaha YS12F flexible SMT placement machine"
+        },
+        "vitronics-soltec-reflow": {
+          "name": "Vitronics Soltec Reflow",
+          "role": "Lead-free reflow soldering",
+          "body": "Controlled, lead-free-compatible reflow profiles for reliable solder joints on both prototype and small-batch builds.",
+          "alt": "Vitronics Soltec reflow oven"
+        },
+        "inspection-rework": {
+          "name": "Inspection & Rework",
+          "role": "Microscope inspection and rework",
+          "body": "Digital microscope stations for fine-pitch inspection and a hot-air rework setup for touch-ups on populated boards.",
+          "alt": "Microscope inspection and rework workstation"
+        }
+      }
+    },
+    "cta": {
+      "overline": "Not sure which service fits?",
+      "title": "Send what you have. We'll help scope the right path.",
+      "body": "BOM, Gerber files, a short description — anything works as a starting point. We reply directly, not through a sales funnel.",
+      "button": "Request a Quote"
+    }
   }
 }

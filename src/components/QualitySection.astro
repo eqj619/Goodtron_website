@@ -1,28 +1,26 @@
 ---
 import { QUALITY_BADGES } from "@/lib/site";
+import { getI18n } from "@/i18n/core";
 import { QUALITY_ICONS } from "@/components/qualityIcons";
 
-// Detailed cards for the Services page, grouped by Inspection / Standards. English only.
+// Detailed cards for the Services page, grouped by Inspection / Standards.
+// English badge copy comes from site.js; ja/zh from services.quality.items.
 const { lang } = Astro.props;
+const { t } = getI18n(lang);
 const groups = ["Inspection", "Standards"];
 ---
 
-<section id="quality" data-testid="section-quality" lang={lang !== "en" ? "en" : undefined} class="border-b border-gray-200 bg-white scroll-mt-32">
+<section id="quality" data-testid="section-quality" class="border-b border-gray-200 bg-white scroll-mt-32">
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-28">
     <div class="max-w-3xl mb-14">
-      <div class="text-sm md:text-[15px] tracking-widest text-red-600 uppercase font-bold mb-4">Quality &amp; Inspection</div>
-      <h2 class="text-4xl lg:text-5xl tracking-tight font-semibold text-black leading-[1.1]">
-        Every board inspected. Standards you can specify.
-      </h2>
-      <p class="mt-5 text-lg text-black/80 leading-relaxed">
-        Prototype speed doesn&apos;t mean skipping inspection. Tell us the class and compliance context on your RFQ and we
-        build and inspect to it.
-      </p>
+      <div class="text-sm md:text-[15px] tracking-widest text-red-600 uppercase font-bold mb-4">{t("services.quality.overline")}</div>
+      <h2 class="text-4xl lg:text-5xl tracking-tight font-semibold text-black leading-[1.1]">{t("services.quality.title")}</h2>
+      <p class="mt-5 text-lg text-black/80 leading-relaxed">{t("services.quality.body")}</p>
     </div>
     {
       groups.map((g) => (
         <div class="mb-10 last:mb-0">
-          <h3 class="text-xs tracking-[0.18em] uppercase text-black/70 font-semibold mb-4">{g}</h3>
+          <h3 class="text-xs tracking-[0.18em] uppercase text-black/70 font-semibold mb-4">{t(`services.quality.groups.${g}`)}</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-200 border border-gray-200">
             {QUALITY_BADGES.filter((b) => b.group === g).map((b) => {
               const Icon = QUALITY_ICONS[b.key];
@@ -32,10 +30,16 @@ const groups = ["Inspection", "Standards"];
                     <div class="w-11 h-11 border border-gray-300 flex items-center justify-center text-red-600">
                       <Icon size={20} aria-hidden="true" />
                     </div>
-                    <span class="font-mono text-xs tracking-widest text-gray-500 uppercase">{b.label}</span>
+                    <span class="font-mono text-xs tracking-widest text-gray-500 uppercase">
+                      {t(`trust.${b.key}.label`, { defaultValue: b.label })}
+                    </span>
                   </div>
-                  <h4 class="mt-5 text-lg font-semibold text-black">{b.title}</h4>
-                  <p class="mt-2 text-[15px] text-black/80 leading-relaxed">{b.body}</p>
+                  <h4 class="mt-5 text-lg font-semibold text-black">
+                    {t(`services.quality.items.${b.key}.title`, { defaultValue: b.title })}
+                  </h4>
+                  <p class="mt-2 text-[15px] text-black/80 leading-relaxed">
+                    {t(`services.quality.items.${b.key}.body`, { defaultValue: b.body })}
+                  </p>
                 </article>
               );
             })}
