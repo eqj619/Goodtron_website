@@ -156,3 +156,22 @@ html, body {
         border-left-color: inherit; border-right-color: inherit; border-top-color: inherit; border-bottom-color: inherit;
     }
 }
+
+/* CJK: pick native fonts per language (shared Han glyphs differ between JP and SC fonts) */
+html[lang="ja"] body,
+html[lang="ja"] .font-display {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+    line-break: strict;
+}
+html[lang="zh-CN"] body,
+html[lang="zh-CN"] .font-display {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+html[lang="ja"] .font-display,
+html[lang="zh-CN"] .font-display {
+    letter-spacing: 0;
+}
+/* Keep Japanese headings from breaking mid-word (Chromium; other browsers ignore it) */
+html[lang="ja"] :is(h1, h2, h3) {
+    word-break: auto-phrase;
+}
