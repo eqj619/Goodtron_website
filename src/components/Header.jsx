@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import { NAV } from "@/lib/site";
+import { Menu, X, ArrowUpRight, Zap } from "lucide-react";
+import { NAV, QUICK_TURN } from "@/lib/site";
 import { Logo } from "@/components/Logo";
 
 export const Header = () => {
@@ -42,6 +42,27 @@ export const Header = () => {
           : "bg-white border-b border-transparent"
       }`}
     >
+      <div data-testid="quick-turn-strip" className="bg-[#0A0A0A] text-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-10 flex items-center justify-between gap-4 text-[13px] sm:text-sm">
+          <p className="flex items-center gap-2 min-w-0">
+            <Zap size={14} className="text-red-500 shrink-0" aria-hidden="true" />
+            <strong className="font-semibold truncate">
+              <span className="sm:hidden">{QUICK_TURN.short}</span>
+              <span className="hidden sm:inline">{QUICK_TURN.headline}</span>
+            </strong>
+            <span className="hidden xl:inline text-gray-400">· {QUICK_TURN.detail}</span>
+          </p>
+          <Link
+            to="/quote"
+            data-testid="quick-turn-strip-cta"
+            className="shrink-0 inline-flex items-center gap-1 font-semibold text-red-400 hover:text-white transition-colors"
+          >
+            <span className="sm:hidden">Fast Quote</span>
+            <span className="hidden sm:inline">{QUICK_TURN.cta}</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Logo />
@@ -70,7 +91,7 @@ export const Header = () => {
               data-testid="header-cta-quote"
               className="btn-primary text-sm"
             >
-              Request a Quote
+              Get a Fast Quote
               <ArrowUpRight size={16} />
             </Link>
           </div>
@@ -117,7 +138,7 @@ export const Header = () => {
               data-testid="mobile-cta-quote"
               className="btn-primary mt-4 justify-center"
             >
-              Request a Quote
+              {QUICK_TURN.cta}
             </Link>
           </div>
         </div>

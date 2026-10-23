@@ -9,6 +9,8 @@ import {
   Boxes,
   Wrench,
 } from "lucide-react";
+import { QUICK_TURN } from "@/lib/site";
+import { QualitySection } from "@/components/QualityBadges";
 
 const SERVICE_BLOCKS = [
   {
@@ -147,8 +149,8 @@ export default function Services() {
               are the services we deliver in-house from Vista, California.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link to="/contact" data-testid="services-hero-cta" className="btn-primary">
-                Request a Quote <ArrowUpRight size={16} />
+              <Link to="/quote" data-testid="services-hero-cta" className="btn-primary">
+                {QUICK_TURN.cta} <ArrowUpRight size={16} />
               </Link>
               <a
                 href="#smt-assembly"
@@ -196,7 +198,7 @@ export default function Services() {
             key={s.slug}
             id={s.slug}
             data-testid={`service-block-${s.slug}`}
-            className={`border-b border-gray-200 ${i % 2 === 0 ? "bg-white" : "bg-[#F9FAFB]"} scroll-mt-24`}
+            className={`border-b border-gray-200 ${i % 2 === 0 ? "bg-white" : "bg-[#F9FAFB]"} scroll-mt-32`}
           >
             <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-24">
               <div className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
@@ -237,7 +239,7 @@ export default function Services() {
                   </ul>
                   <div className="mt-9">
                     <Link
-                      to="/contact"
+                      to="/quote"
                       data-testid={`service-cta-${s.slug}`}
                       className="inline-flex items-center gap-2 text-sm font-medium text-black border-b border-black pb-1 hover:text-red-600 hover:border-red-600 transition-colors"
                     >
@@ -251,11 +253,13 @@ export default function Services() {
         );
       })}
 
+      <QualitySection />
+
       {/* EQUIPMENT SECTION — supporting capability, moved to bottom */}
       <section
         id="equipment"
         data-testid="section-equipment"
-        className="border-b border-gray-200 bg-[#F5F5F5] scroll-mt-24"
+        className="border-b border-gray-200 bg-[#F5F5F5] scroll-mt-32"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-28">
           <div className="max-w-3xl mb-14">
@@ -321,7 +325,7 @@ export default function Services() {
             </div>
             <div className="lg:col-span-4 lg:text-right">
               <Link
-                to="/contact"
+                to="/quote"
                 data-testid="services-bottom-cta"
                 className="btn-primary"
               >

@@ -15,9 +15,13 @@ import {
   Wrench,
   Phone,
   Mail,
-  MapPin,
+  Timer,
 } from "lucide-react";
-import { PCB_IMAGES, SITE } from "@/lib/site";
+import { PCB_IMAGES, SITE, QUICK_TURN, DFA_REVIEW } from "@/lib/site";
+import { TrustBar } from "@/components/QualityBadges";
+import { DfaReviewBanner } from "@/components/DfaReviewBanner";
+import { CaseStudies } from "@/components/CaseStudies";
+import { RfqForm } from "@/components/RfqForm";
 
 const CORE_SERVICES = [
   {
@@ -113,9 +117,16 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 lg:pt-28 pb-20 lg:pb-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
             <div className="lg:col-span-6 gt-reveal">
-              <div className="text-sm md:text-base tracking-widest text-red-600 uppercase font-bold mb-6">
+              <div className="text-sm md:text-base tracking-widest text-red-600 uppercase font-bold mb-5">
                 Electronics Manufacturing · Vista, CA
               </div>
+              <p
+                data-testid="hero-quick-turn"
+                className="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 text-sm sm:text-[15px] font-bold mb-7"
+              >
+                <Zap size={16} aria-hidden="true" />
+                {QUICK_TURN.headline}
+              </p>
               <h1 className="font-display text-[44px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-semibold text-gray-900">
                 SMT &amp; PCB Assembly for{" "}
                 <span className="text-red-600">Prototype</span> and{" "}
@@ -128,13 +139,17 @@ export default function Home() {
                 practical, engineering-aware project support.
               </p>
               <div className="mt-10 flex flex-wrap gap-3">
-                <Link to="/contact" data-testid="hero-cta-quote" className="btn-primary">
-                  Request a Quote <ArrowUpRight size={16} />
+                <Link to="/quote" data-testid="hero-cta-quote" className="btn-primary">
+                  {QUICK_TURN.cta} <ArrowUpRight size={16} />
                 </Link>
-                <Link to="/contact" data-testid="hero-cta-contact" className="btn-secondary">
-                  Contact Us <ArrowRight size={16} />
+                <Link to="/quote?review=dfa" data-testid="hero-cta-dfa" className="btn-secondary">
+                  {DFA_REVIEW.short} <ArrowRight size={16} />
                 </Link>
               </div>
+              <p className="mt-5 flex items-center gap-2 text-sm text-gray-600">
+                <Timer size={15} className="text-red-600" aria-hidden="true" />
+                {QUICK_TURN.detail} — quotes back within 24 hours.
+              </p>
             </div>
 
             <div className="lg:col-span-6 gt-reveal delay-2">
@@ -149,6 +164,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TrustBar />
 
       {/* CORE SERVICES */}
       <section className="border-b border-gray-200 bg-white" data-testid="section-core-services">
@@ -214,6 +231,8 @@ export default function Home() {
         </div>
       </section>
 
+      <DfaReviewBanner />
+
       {/* WHY / CAPABILITIES */}
       <section className="border-b border-gray-200 bg-white" data-testid="section-why">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
@@ -256,6 +275,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <CaseStudies />
 
       {/* SHORT COMPANY INTRO */}
       <section className="border-b border-gray-200 bg-white" data-testid="section-about">
@@ -322,7 +343,7 @@ export default function Home() {
       </section>
 
       {/* SUPPORT */}
-      <section id="support" className="border-b border-gray-200 bg-[#F9FAFB] scroll-mt-24" data-testid="section-support">
+      <section id="support" className="border-b border-gray-200 bg-[#F9FAFB] scroll-mt-32" data-testid="section-support">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
           <div className="max-w-3xl mb-16">
             <div className="text-sm md:text-[15px] tracking-widest text-black uppercase font-bold mb-4">
@@ -366,7 +387,7 @@ export default function Home() {
                   Contact Form <ArrowUpRight size={14} />
                 </Link>
                 <Link
-                  to="/quote-form"
+                  to="/quote"
                   data-testid="support-customer-quote"
                   className="btn-secondary"
                 >
@@ -434,34 +455,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="bg-[#0A0A0A] text-white relative overflow-hidden" data-testid="section-cta">
+      {/* EMBEDDED RFQ */}
+      <section id="rfq" className="bg-[#0A0A0A] relative overflow-hidden scroll-mt-32" data-testid="section-rfq">
         <div className="absolute inset-0 gt-grid-bg-dark opacity-40 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-4 text-white">
               <div className="text-sm md:text-[15px] tracking-widest text-red-500 uppercase font-bold mb-4">
-                Ready when you are
+                Request a Quote
               </div>
               <h2 className="font-display text-3xl lg:text-5xl tracking-tight font-semibold leading-tight">
-                Have a board to assemble? Let&apos;s look at it together.
+                Have a board to build? Get a quote in 24 hours.
               </h2>
-              <p className="mt-5 text-gray-400 text-lg leading-relaxed max-w-2xl">
-                Send your BOM, Gerber files, and a short description of what
-                you&apos;re building. We&apos;ll respond with clear questions or
-                a structured quote — no sales pressure.
+              <p className="mt-5 text-gray-400 text-lg leading-relaxed">
+                Drop your Gerber, BOM, and centroid files, pick a quantity and
+                turnaround, and an engineer replies directly — no sales pressure.
               </p>
-              <div className="mt-8 text-sm text-gray-400 font-mono tracking-wider">
-                {SITE.email} · {SITE.phone}
+              <div className="mt-8 text-sm text-gray-400 font-mono tracking-wider space-y-1">
+                <div>{SITE.email}</div>
+                <div>{SITE.phone}</div>
               </div>
             </div>
-            <div className="lg:col-span-4 flex flex-col gap-3 lg:items-end">
-              <Link to="/contact" data-testid="bottom-cta-quote" className="btn-primary w-full lg:w-auto justify-center">
-                Request a Quote <ArrowUpRight size={16} />
-              </Link>
-              <Link to="/services" data-testid="bottom-cta-services" className="btn-secondary w-full lg:w-auto justify-center bg-white text-gray-900 border-white hover:bg-gray-100">
-                View Services <ArrowRight size={16} />
-              </Link>
+            <div className="lg:col-span-8">
+              <RfqForm testId="home-rfq" />
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import Contact from "@/pages/Contact";
 import ContactForm from "@/pages/ContactForm";
-import QuoteForm from "@/pages/QuoteForm";
+import Quote from "@/pages/Quote";
 import NotFound from "@/pages/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -19,7 +19,8 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/contact-form" element={<ContactForm />} />
-          <Route path="/quote-form" element={<QuoteForm />} />
+          <Route path="/quote" element={<Quote />} />
+          <Route path="/quote-form" element={<Navigate to="/quote" replace />} />
           {/* Legacy paths → Home */}
           <Route path="/about" element={<Navigate to="/" replace />} />
           <Route path="/capabilities" element={<Navigate to="/services" replace />} />
@@ -28,7 +29,6 @@ export default function App() {
           <Route path="/faq" element={<Navigate to="/" replace />} />
           <Route path="/careers" element={<Navigate to="/" replace />} />
           <Route path="/join-us" element={<Navigate to="/" replace />} />
-          <Route path="/quote" element={<Navigate to="/contact" replace />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -150,3 +150,132 @@ export const FAQ_ITEMS = [
     a: "No — and we're upfront about that. Goodtron Electronics is a small, founder-led team focused on responsive communication and practical project coordination for prototype and low-volume work.",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Conversion content. Every capability / certification claim on the site is
+// defined here so it can be verified in one place before publishing.
+// ---------------------------------------------------------------------------
+
+export const QUICK_TURN = {
+  headline: "24–72 Hour Quick-Turn SMT & Prototype Assembly",
+  short: "24–72h Quick-Turn SMT",
+  detail: "Fast turns on ECOs and Rev-A / Rev-B builds",
+  cta: "Get a Fast Quote in 24h",
+};
+
+export const QUALITY_BADGES = [
+  {
+    key: "aoi",
+    group: "Inspection",
+    label: "AOI",
+    title: "Automated Optical Inspection",
+    micro: "Checks placement, polarity & solder joints",
+    body: "Automated optical inspection after reflow catches missing, shifted, or reversed parts and solder defects before boards leave the line.",
+  },
+  {
+    key: "xray",
+    group: "Inspection",
+    label: "X-Ray",
+    title: "X-Ray Inspection",
+    micro: "Verifies hidden BGA / QFN joints",
+    body: "X-ray verification of BGA, QFN, and other bottom-terminated packages where solder joints can't be seen optically.",
+  },
+  {
+    key: "visual",
+    group: "Inspection",
+    label: "Visual QC",
+    title: "High-Magnification Visual QC",
+    micro: "Microscope review of fine-pitch work",
+    body: "Digital-microscope inspection of fine-pitch leads, 0201 passives, and reworked joints by the people who built the board.",
+  },
+  {
+    key: "ipc",
+    group: "Standards",
+    label: "IPC-A-610",
+    title: "IPC-A-610 Class 2 & Class 3",
+    micro: "Workmanship to Class 2 or Class 3 on request",
+    body: "Builds inspected to IPC-A-610 acceptability criteria — Class 2 by default, Class 3 for high-reliability products when specified on the RFQ.",
+  },
+  {
+    key: "iso13485",
+    group: "Standards",
+    label: "ISO 13485",
+    title: "ISO 13485-Aligned Process",
+    micro: "MedTech-ready documentation & traceability",
+    body: "Process documentation, lot traceability, and travelers aligned with ISO 13485 expectations for medical-device prototypes.",
+  },
+  {
+    key: "itar",
+    group: "Standards",
+    label: "ITAR",
+    title: "ITAR / Defense Prototyping Readiness",
+    micro: "U.S.-based build & controlled data handling",
+    body: "U.S.-only facility and staff with controlled handling of design data for defense and aerospace prototype work.",
+  },
+];
+
+export const CASE_STUDIES = [
+  {
+    key: "medtech",
+    sector: "MedTech · Quick-Turn",
+    title: "48-hour prototype run for a biomedical device startup",
+    body: "Assembled 25 multi-layer prototype boards in 48 hours for a San Diego biomedical device startup, keeping their clinical-demo schedule on track.",
+    metrics: [
+      { value: "48-Hour", label: "Turn" },
+      { value: "25", label: "Multi-layer boards" },
+    ],
+    img: "/assets/pcb-4.jpg",
+    alt: "Multi-layer prototype PCB assembled for a medical device",
+  },
+  {
+    key: "robotics",
+    sector: "Robotics · Complex SMT",
+    title: "Fine-pitch 0201 & BGA placement for robotics testing",
+    body: "Handled fine-pitch 0201 passives and BGA placement with 100% X-ray verification so the customer's robotics test campaign started on known-good hardware.",
+    metrics: [
+      { value: "100%", label: "X-ray verified" },
+      { value: "0201 & BGA", label: "Ready" },
+    ],
+    img: "/assets/pcb-1.jpg",
+    alt: "Densely populated robotics control board with BGA and 0201 components",
+  },
+];
+
+// Set approved: true only for a real customer quote with permission to publish.
+// Unapproved testimonials render in local development only.
+export const TESTIMONIAL = {
+  approved: false,
+  quote:
+    "We talked directly with the engineer building our boards — questions came back the same day, and the boards were on our bench in Carlsbad on the date they promised.",
+  name: "Hardware Engineering Lead",
+  company: "Southern California robotics company",
+  metric: { value: "Zero", label: "Defects at incoming inspection" },
+};
+
+export const DFA_REVIEW = {
+  title: "Free Pre-Build BOM & DFA Risk Review",
+  pitch:
+    "Avoid costly assembly delays before placing your order. Submit your BOM and receive a Free Pre-Build BOM & DFA (Design for Assembly) Risk Review from our engineering team within 24 hours.",
+  benefits: [
+    { t: "Obsolescence & lifecycle check", d: "EOL, NRND, and last-time-buy parts flagged against your BOM." },
+    { t: "Footprint / package mismatch detection", d: "Land patterns compared with the MPN's package before parts are bought." },
+    { t: "Local procurement lead-time flags", d: "Long-lead and allocation-risk parts identified, with alternates suggested." },
+  ],
+  cta: "Get My Free BOM & DFA Review",
+  short: "Free BOM & DFA Check",
+};
+
+export const RFQ_FILES = [
+  { label: "Gerber (RS-274X) / ODB++", required: true },
+  { label: "BOM (CSV/Excel with MPN)", required: true },
+  { label: "Centroid / Pick & Place (XY)", required: true },
+  { label: "Assembly Drawings / Notes", required: false },
+];
+
+export const RFQ_QUANTITIES = ["1–5", "5–25", "25–100", "100+"];
+
+export const RFQ_TURNAROUNDS = [
+  { value: "24h", label: "24 Hours", hint: "Quick-turn" },
+  { value: "3-day", label: "3 Days", hint: "Expedited" },
+  { value: "standard", label: "Standard", hint: "1–2 weeks" },
+];

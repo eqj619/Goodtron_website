@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => {
     // The source was written for Create React App; keep its env var name working.
     define: {
       "process.env.REACT_APP_BACKEND_URL": JSON.stringify(env.REACT_APP_BACKEND_URL ?? ""),
+      "process.env.REACT_APP_RFQ_UPLOAD_URL": JSON.stringify(env.REACT_APP_RFQ_UPLOAD_URL ?? ""),
     },
   };
 });
