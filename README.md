@@ -19,6 +19,13 @@ npm run preview    # serve dist/ locally
 
 The forms post to the existing API at `https://goodtronsmt.com/api`, which accepts cross-origin requests, so the static site does not need to live on the same host as the API.
 
+## Demo
+
+`npm run deploy:demo` builds a noindex copy of the site and publishes it to
+https://goodtron-demo.goodtron-website.workers.dev (Cloudflare account eiji.oga@goodtronsmt.com;
+run `npx wrangler login` first). The deploy config lives in `deploy/demo/` — don't run
+`wrangler` from the repo root, it rewrites the Astro config.
+
 ## Environment variables
 
 Put these in `.env` (not committed):

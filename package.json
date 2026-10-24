@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "build:demo": "PUBLIC_DEMO=true astro build && printf '/*\\n  X-Robots-Tag: noindex, nofollow\\n' > dist/_headers"
+    "build:demo": "PUBLIC_DEMO=true astro build && printf '/*\\n  X-Robots-Tag: noindex, nofollow\\n' > dist/_headers",
+    "deploy:demo": "npm run build:demo && cd deploy/demo && npx --yes wrangler@4 deploy"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
