@@ -21,7 +21,7 @@ export const NAV = [
 ];
 
 export const PCB_IMAGES = {
-  hero: "/assets/pcb-3.jpg",
+  hero: "/assets/hero-smt.jpg",
   smt: "/assets/pcb-1.jpg",
   pcb: "/assets/pcb-2.jpg",
   prototype: "/assets/pcb-4.jpg",
@@ -238,8 +238,8 @@ export const CASE_STUDIES = [
       { value: "100%", label: "X-ray verified" },
       { value: "0201 & BGA", label: "Ready" },
     ],
-    img: "/assets/pcb-1.jpg",
-    alt: "Densely populated robotics control board with BGA and 0201 components",
+    img: "/assets/pcb-2.jpg",
+    alt: "Fine-pitch socket and dense surface-mount parts on a multilayer board",
   },
 ];
 

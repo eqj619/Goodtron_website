@@ -328,8 +328,13 @@ const WHY = [
 
           <div class="lg:col-span-6">
             <div class="grid grid-cols-2 gap-4">
-              {[PCB_IMAGES.aboutHero, PCB_IMAGES.aboutPrototype, PCB_IMAGES.aboutHands].map(
-                (src, i) => (
+              {/* Goodtron's own facility photos (the stock board photos already appear in the service cards). */}
+              {[
+                ["/assets/facility-ys12f.jpg", "Yamaha YS12F SMT placement machine at Goodtron's Vista facility"],
+                ["/assets/facility-reflow.jpg", "Vitronics Soltec reflow oven at Goodtron"],
+                ["/assets/facility-4.jpg", "Microscope inspection and rework workstation at Goodtron"],
+              ].map(
+                ([src, alt], i) => (
                   <div
                     class={`overflow-hidden border border-gray-200 ${
                       i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"
@@ -337,7 +342,7 @@ const WHY = [
                   >
                     <img
                       src={src}
-                      alt="Goodtron Electronics — assembly workspace and PCB detail"
+                      alt={alt}
                       loading="lazy"
                       class="w-full h-full object-cover"
                     />
