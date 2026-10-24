@@ -28,6 +28,8 @@ const canonical = new URL(localePath(lang, path), site).href;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    {/* Demo deploys (npm run build:demo) must stay out of search results. */}
+    {import.meta.env.PUBLIC_DEMO === "true" && <meta name="robots" content="noindex, nofollow" />}
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href={canonical} />
