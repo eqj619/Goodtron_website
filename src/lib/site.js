@@ -226,8 +226,8 @@ export const CASE_STUDIES = [
       { value: "48-Hour", label: "Turn" },
       { value: "25", label: "Multi-layer boards" },
     ],
-    img: "/assets/pcb-4.jpg",
-    alt: "Multi-layer prototype PCB assembled for a medical device",
+    img: "/assets/case-medtech.jpg",
+    alt: "Panel of freshly assembled prototype boards under an inspection system",
   },
   {
     key: "robotics",
