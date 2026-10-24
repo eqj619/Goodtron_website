@@ -15,7 +15,6 @@ export const SITE = {
 export const NAV = [
   { to: "/", key: "home", label: "Home" },
   { to: "/services", key: "services", label: "Services" },
-  { to: "/about", key: "about", label: "About Us" },
   { to: "/#support", key: "support", label: "Support" },
   { to: "/contact", key: "contact", label: "Contact Us" },
 ];

@@ -4,6 +4,10 @@ import sitemap from "@astrojs/sitemap";
 import path from "node:path";
 
 const REDIRECTS = {
+  // The About page was removed; keep shared demo links working.
+  "/about": "/",
+  "/ja/about": "/ja/",
+  "/zh/about": "/zh/",
   "/capabilities": "/services/",
   "/process": "/services/",
   "/industries": "/",

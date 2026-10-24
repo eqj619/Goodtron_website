@@ -12,7 +12,6 @@
   "nav": {
     "home": "Home",
     "services": "Services",
-    "about": "About Us",
     "support": "Support",
     "contact": "Contact Us"
   },
@@ -115,58 +114,6 @@
       ["Build on your schedule", "24-hour, 3-day, or standard 1–2 week builds, with progress updates along the way."]
     ],
     "talk": "Prefer to talk?"
-  },
-  "about": {
-    "overline": "About Goodtron",
-    "title": "Engineering-First PCB Assembly & Prototyping",
-    "subtitle": "Bridging world-class high-speed manufacturing expertise with responsive, local Southern California agility.",
-    "heroAlt": "Yamaha SMT placement line at Goodtron's Vista, California facility",
-    "mission": {
-      "overline": "Our Mission",
-      "title": "Eliminating the friction between prototype design and assembly reality.",
-      "paragraphs": [
-        "Too many hardware schedules slip in the gap between a finished design and a working board — a footprint that doesn't match the part, a BOM line that went obsolete, a vendor queue that puts a ten-board prototype behind a ten-thousand-board order.",
-        "Goodtron exists to close that gap. Every build starts with an engineering review of your BOM and design for assembly, runs on our own SMT line in Vista, California, and is coordinated directly with the people placing your parts."
-      ],
-      "attributes": [
-        ["Vista, CA facility", "In-house SMT line in North San Diego County, close to Southern California hardware teams."],
-        ["24–72h quick-turns", "Prototype and ECO builds turned in days, not weeks."],
-        ["Engineering-first review", "Free BOM & DFA pre-checks before parts are bought or boards are built."],
-        ["Prototype & low-volume focus", "Small runs are our core business — never squeezed in around large orders."]
-      ]
-    },
-    "leader": {
-      "overline": "Leadership",
-      "heading": "Meet the founder",
-      "name": "Daley Chak",
-      "title": "Founder & Technical Operations Lead",
-      "photoLabel": "Photo of Daley Chak coming soon",
-      "bio": [
-        "Daley is a veteran electronics manufacturing specialist whose career spans the global hardware manufacturing hub of Shenzhen, China, through to Southern California's tech ecosystem.",
-        "Daley brings deep hands-on expertise in surface-mount technology (SMT), high-speed pick-and-place operation on Yamaha SMT platforms, fine-pitch BGA and 0201 placement, and rigorous assembly quality standards.",
-        "Daley partners directly with hardware engineers, robotics developers, and medical device innovators to move designs from schematic to physical assembly without costly revisions."
-      ],
-      "expertise": "Expertise",
-      "tags": [
-        "Shenzhen Supply Chain & Manufacturing Veteran",
-        "SMT & DFA Optimization",
-        "Yamaha High-Speed SMT Specialist",
-        "Direct Engineering Support"
-      ]
-    },
-    "values": {
-      "overline": "Why Goodtron",
-      "heading": "What you can count on.",
-      "items": [
-        ["Direct Engineering Communication", "No sales middlemen — talk directly to the manufacturing specialists building your boards."],
-        ["Fast-Turn Agility", "A local California facility built for quick iterations and ECO revisions."],
-        ["Zero-Defect Commitment", "AOI, X-ray inspection, and IPC-A-610 Class 2/3 alignment on every build."]
-      ]
-    },
-    "cta": {
-      "title": "Talk to the people who will build your boards.",
-      "body": "Send your files for a quote or a free BOM & DFA review — an engineer replies within 24 hours."
-    }
   },
   "services": {
     "hero": {
