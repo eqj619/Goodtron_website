@@ -1,7 +1,6 @@
 ---
 import { Zap, Mail, Phone, Clock } from "lucide-react";
 import Base from "@/layouts/Base.astro";
-import CaseCards from "@/components/CaseCards.astro";
 import RfqIsland from "@/islands/RfqIsland.jsx";
 import { SITE, QUICK_TURN, DFA_REVIEW } from "@/lib/site";
 import { getI18n } from "@/i18n/core";
@@ -32,15 +31,6 @@ const description = dfa ? t("dfa.pitch", { defaultValue: DFA_REVIEW.pitch }) : t
         <p class="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl">
           {dfa ? t("dfa.pitch", { defaultValue: DFA_REVIEW.pitch }) : t("quote.body")}
         </p>
-      </div>
-    </section>
-
-    <section class="border-b border-gray-200 bg-[#F9FAFB]" aria-labelledby="quote-proof">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-14">
-        <h2 id="quote-proof" class="text-xs tracking-[0.18em] uppercase text-gray-600 font-semibold mb-6">
-          {t("quote.proof")}
-        </h2>
-        <CaseCards lang={lang} compact />
       </div>
     </section>
 

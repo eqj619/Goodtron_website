@@ -41,16 +41,14 @@ Put these in `.env` (not committed):
 | --- | --- |
 | `src/pages/[...lang]/*.astro` | One file per page; each builds `/page/`, `/ja/page/`, `/zh/page/` |
 | `src/layouts/Base.astro` | `<head>` (canonical, hreflang, Open Graph), header, footer |
-| `src/components/*.astro` | Static sections (header, footer, trust bar, case studies, …) |
+| `src/components/*.astro` | Static sections (header, footer, trust bar, …) |
 | `src/islands/*.jsx`, `src/components/RfqForm.jsx` | Interactive forms, hydrated in the browser |
 | `src/lib/site.js` | Company info and all marketing claims |
 | `src/locales/{en,ja,zh}.json` | Translations |
 
 ## Where content lives
 
-All marketing claims — quick-turn times, inspection and certification badges, case studies, the testimonial, the BOM & DFA offer, RFQ options — are in `src/lib/site.js`. Verify them there before publishing.
-
-The testimonial renders only in `npm run dev` until `TESTIMONIAL.approved` is set to `true` for a real, approved customer quote.
+All marketing claims — quick-turn times, inspection and certification badges, the BOM & DFA offer, RFQ options — are in `src/lib/site.js`. Verify them there before publishing.
 
 ## Languages
 

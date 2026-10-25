@@ -19,7 +19,6 @@ import {
 import Base from "@/layouts/Base.astro";
 import TrustBar from "@/components/TrustBar.astro";
 import DfaReviewBanner from "@/components/DfaReviewBanner.astro";
-import CaseStudies from "@/components/CaseStudies.astro";
 import RfqIsland from "@/islands/RfqIsland.jsx";
 import { PCB_IMAGES, SITE, QUICK_TURN, DFA_REVIEW } from "@/lib/site";
 import { getI18n, localeStaticPaths, langFromParams } from "@/i18n/core";
@@ -284,8 +283,6 @@ const WHY = [
         </div>
       </div>
     </section>
-
-    <CaseStudies lang={lang} />
 
     <!-- SHORT COMPANY INTRO -->
     <section class="border-b border-gray-200 bg-white" data-testid="section-about" lang={enLang}>

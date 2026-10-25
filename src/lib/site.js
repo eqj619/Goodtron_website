@@ -215,44 +215,6 @@ export const QUALITY_BADGES = [
   },
 ];
 
-export const CASE_STUDIES = [
-  {
-    key: "medtech",
-    sector: "MedTech · Quick-Turn",
-    title: "48-hour prototype run for a biomedical device startup",
-    body: "Assembled 25 multi-layer prototype boards in 48 hours for a San Diego biomedical device startup, keeping their clinical-demo schedule on track.",
-    metrics: [
-      { value: "48-Hour", label: "Turn" },
-      { value: "25", label: "Multi-layer boards" },
-    ],
-    img: "/assets/case-medtech.jpg",
-    alt: "Panel of freshly assembled prototype boards under an inspection system",
-  },
-  {
-    key: "robotics",
-    sector: "Robotics · Complex SMT",
-    title: "Fine-pitch 0201 & BGA placement for robotics testing",
-    body: "Handled fine-pitch 0201 passives and BGA placement with 100% X-ray verification so the customer's robotics test campaign started on known-good hardware.",
-    metrics: [
-      { value: "100%", label: "X-ray verified" },
-      { value: "0201 & BGA", label: "Ready" },
-    ],
-    img: "/assets/pcb-2.jpg",
-    alt: "Fine-pitch socket and dense surface-mount parts on a multilayer board",
-  },
-];
-
-// Set approved: true only for a real customer quote with permission to publish.
-// Unapproved testimonials render in local development only.
-export const TESTIMONIAL = {
-  approved: false,
-  quote:
-    "We talked directly with the engineer building our boards — questions came back the same day, and the boards were on our bench in Carlsbad on the date they promised.",
-  name: "Hardware Engineering Lead",
-  company: "Southern California robotics company",
-  metric: { value: "Zero", label: "Defects at incoming inspection" },
-};
-
 export const DFA_REVIEW = {
   title: "Free Pre-Build BOM & DFA Risk Review",
   pitch:

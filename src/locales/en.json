@@ -106,7 +106,6 @@
   "quote": {
     "title": "Request a Quote — reply within 24 hours",
     "body": "Send your Gerber, BOM, and centroid files with a target quantity and turnaround. Prototypes, ECO re-spins, and low-volume runs all welcome.",
-    "proof": "Recent quick-turn & complex SMT builds",
     "nextHeading": "What happens next",
     "next": [
       ["Engineer review", "Your files are reviewed by the people who will build the board — not a sales desk."],
