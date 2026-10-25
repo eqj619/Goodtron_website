@@ -58,7 +58,7 @@ English (default, at `/`), Japanese (`/ja/`), and Simplified Chinese (`/zh/`). E
 - English copy that already exists in `src/lib/site.js` is passed as `defaultValue` rather than duplicated in `en.json`; `ja.json` / `zh.json` hold its translations.
 - A string missing in Japanese or Chinese falls back to English; a key missing everywhere renders nothing and logs `[i18n] missing key` in development.
 - The switcher remembers the choice in `localStorage` (`gt-lang`); a returning visitor who lands on an English URL is forwarded to their language.
-- Translated so far: header, footer, the whole home page, Services, Quote and DFA review pages, and the RFQ form. The Contact page and general contact form are still English in every language and carry `lang="en"`.
+- Every page is translated. Proper names, the U.S. mailing address, and file-format names stay in English.
 - Keep translated text that mixes inline elements on one line in `.astro` templates — line breaks become spaces, which breaks Japanese and Chinese.
 
 ## Old URLs

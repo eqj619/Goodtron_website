@@ -9,8 +9,6 @@ export const getStaticPaths = localeStaticPaths;
 
 const lang = langFromParams(Astro.params);
 const { t, href } = getI18n(lang);
-// Hero and contact details are not translated yet; mark them English.
-const enLang = lang !== "en" ? "en" : undefined;
 
 const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold text-red-600";
 ---
@@ -18,17 +16,16 @@ const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold tex
 <Base lang={lang} path="/contact" title={t("nav.contact")}>
   <div data-testid="page-contact">
     <!-- HERO -->
-    <section class="relative border-b border-gray-200 bg-white" lang={enLang}>
+    <section class="relative border-b border-gray-200 bg-white">
       <div class="absolute inset-0 gt-grid-bg opacity-50 pointer-events-none"></div>
       <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-24">
         <div class="max-w-4xl">
-          <div class={overline + " mb-6"}>Contact · Request a Quote</div>
+          <div class={overline + " mb-6"}>{t("contact.overline")}</div>
           <h1 class="font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-semibold text-gray-900">
-            Ready to discuss your PCB assembly or prototype project?
+            {t("contact.title")}
           </h1>
           <p class="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl">
-            Drop your design files, choose a quantity and turnaround, and an
-            engineer will reply with a quote or questions within 24 hours.
+            {t("contact.body")}
           </p>
         </div>
       </div>
@@ -38,9 +35,9 @@ const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold tex
     <section class="border-b border-gray-200 bg-white">
       <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <aside class="lg:col-span-4 order-2 lg:order-1" lang={enLang}>
+          <aside class="lg:col-span-4 order-2 lg:order-1">
             <div class="border border-gray-200 p-8 bg-white">
-              <div class={overline + " mb-6"}>Reach us directly</div>
+              <div class={overline + " mb-6"}>{t("contact.reach")}</div>
 
               <div class="space-y-6">
                 <a
@@ -53,7 +50,7 @@ const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold tex
                   </div>
                   <div>
                     <div class="text-xs md:text-sm tracking-widest text-gray-500 uppercase font-semibold">
-                      Email
+                      {t("contact.email")}
                     </div>
                     <div class="mt-1 text-gray-900 group-hover:text-red-600 transition-colors">
                       {SITE.email}
@@ -71,7 +68,7 @@ const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold tex
                   </div>
                   <div>
                     <div class="text-xs md:text-sm tracking-widest text-gray-500 uppercase font-semibold">
-                      Phone
+                      {t("contact.phone")}
                     </div>
                     <div class="mt-1 text-gray-900 group-hover:text-red-600 transition-colors">
                       {SITE.phone}
@@ -85,9 +82,10 @@ const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold tex
                   </div>
                   <div>
                     <div class="text-xs md:text-sm tracking-widest text-gray-500 uppercase font-semibold">
-                      Address
+                      {t("contact.address")}
                     </div>
-                    <div class="mt-1 text-gray-900">{SITE.address}</div>
+                    {/* A U.S. mailing address stays in English in every language. */}
+                    <div class="mt-1 text-gray-900" lang="en">{SITE.address}</div>
                   </div>
                 </div>
 
@@ -97,22 +95,21 @@ const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold tex
                   </div>
                   <div>
                     <div class="text-xs md:text-sm tracking-widest text-gray-500 uppercase font-semibold">
-                      Working Hours
+                      {t("contact.hours")}
                     </div>
-                    <div class="mt-1 text-gray-900">{SITE.hours}</div>
+                    <div class="mt-1 text-gray-900">{t("site.hours", { defaultValue: SITE.hours })}</div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="mt-6 border border-gray-200 p-7 bg-[#F9FAFB]">
-              <div class={overline + " mb-3"}>Not a quote?</div>
+              <div class={overline + " mb-3"}>{t("contact.notQuote.title")}</div>
               <p class="text-[15px] text-gray-700 leading-relaxed">
-                For order status, paperwork, or general questions, use our
-                general contact form instead.
+                {t("contact.notQuote.body")}
               </p>
               <a href={href("/contact-form")} class="btn-secondary mt-5 text-sm">
-                General Contact Form <ArrowUpRight size={14} />
+                {t("contact.notQuote.button")} <ArrowUpRight size={14} />
               </a>
             </div>
           </aside>

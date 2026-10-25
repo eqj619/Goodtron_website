@@ -9,35 +9,33 @@ export const getStaticPaths = localeStaticPaths;
 
 const lang = langFromParams(Astro.params);
 const { t, href } = getI18n(lang);
-// Not translated yet; mark it English.
-const enLang = lang !== "en" ? "en" : undefined;
 const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold text-red-600";
 ---
 
-<Base lang={lang} path="/contact-form" title="Contact Form">
-  <div data-testid="page-contact-form" lang={enLang}>
+<Base lang={lang} path="/contact-form" title={t("contactForm.title")}>
+  <div data-testid="page-contact-form">
     <section class="relative border-b border-gray-200 bg-white">
       <div class="absolute inset-0 gt-grid-bg opacity-50 pointer-events-none"></div>
       <div class="relative max-w-4xl mx-auto px-6 lg:px-8 py-20 lg:py-24">
         <a href={href("/")} data-testid="contact-form-back" class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-red-600 mb-8">
-          <ArrowLeft size={14} /> Back to Home
+          <ArrowLeft size={14} /> {t("contactForm.back")}
         </a>
-        <div class={overline + " mb-4"}>Customer Service · Contact Form</div>
-        <h1 class="font-display text-4xl lg:text-5xl leading-tight tracking-tight font-semibold text-gray-900">Send us a message.</h1>
+        <div class={overline + " mb-4"}>{t("contactForm.overline")}</div>
+        <h1 class="font-display text-4xl lg:text-5xl leading-tight tracking-tight font-semibold text-gray-900">{t("contactForm.title")}</h1>
         <p class="mt-5 text-lg text-gray-600 leading-relaxed max-w-2xl">
-          Have a suggestion, a comment, or a question? Use this form and we'll reply directly.
+          {t("contactForm.body")}
         </p>
         <div data-testid="contact-form-hours" class="mt-6 inline-flex items-center gap-2 border border-gray-200 bg-white px-4 py-2 text-[14px] text-gray-800">
           <Clock size={14} className="text-red-600" />
-          <span class="font-semibold text-gray-900">Working Hours:</span>
-          <span>{SITE.hours}</span>
+          <span class="font-semibold text-gray-900">{t("contactForm.hoursLabel")}</span>
+          <span>{t("site.hours", { defaultValue: SITE.hours })}</span>
         </div>
       </div>
     </section>
 
     <section class="border-b border-gray-200 bg-white">
       <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
-        <ContactMessageForm client:load />
+        <ContactMessageForm client:load lang={lang} />
       </div>
     </section>
   </div>

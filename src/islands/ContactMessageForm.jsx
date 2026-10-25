@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ArrowUpRight, CheckCircle2, AlertCircle } from "lucide-react";
 import { submitContact } from "@/lib/api";
+import { I18nProvider, useI18n } from "@/i18n";
 
+// Values are sent to the API in English; labels come from contactForm.form.types.
 const FEEDBACK_TYPES = ["Suggestion", "Comment", "Question"];
 
 const fieldBase =
@@ -11,7 +13,17 @@ const overline = "text-sm md:text-[15px] tracking-widest uppercase font-bold tex
 
 const EMPTY = { name: "", email: "", company: "", feedback_type: "", subject: "", message: "" };
 
-export default function ContactMessageForm() {
+export default function ContactMessageForm({ lang = "en" }) {
+  return (
+    <I18nProvider lang={lang}>
+      <MessageForm />
+    </I18nProvider>
+  );
+}
+
+function MessageForm() {
+  const { t } = useI18n();
+  const f = (k) => t(`contactForm.form.${k}`);
   const [form, setForm] = useState(EMPTY);
   const [status, setStatus] = useState({ state: "idle", msg: "" });
 
@@ -20,7 +32,7 @@ export default function ContactMessageForm() {
   const submit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.feedback_type || !form.message) {
-      setStatus({ state: "error", msg: "Please fill in all required fields." });
+      setStatus({ state: "error", msg: f("required") });
       return;
     }
     setStatus({ state: "loading", msg: "" });
@@ -30,10 +42,10 @@ export default function ContactMessageForm() {
         company: form.company || null,
         subject: form.subject || null,
       });
-      setStatus({ state: "success", msg: "Thanks — we received your message and will reply directly." });
+      setStatus({ state: "success", msg: f("success") });
       setForm(EMPTY);
     } catch (err) {
-      const detail = err?.response?.data?.detail || "Something went wrong. Please try again.";
+      const detail = err?.response?.data?.detail || f("failed");
       setStatus({ state: "error", msg: String(detail) });
     }
   };
@@ -42,7 +54,7 @@ export default function ContactMessageForm() {
     <form onSubmit={submit} noValidate data-testid="contact-form" className="border border-gray-200 p-6 lg:p-10 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="cf-type" className={overline}>Feedback Type *</label>
+          <label htmlFor="cf-type" className={overline}>{f("type")} *</label>
           <select
             id="cf-type"
             data-testid="contact-feedback-type"
@@ -52,40 +64,40 @@ export default function ContactMessageForm() {
             required
           >
             <option value="" disabled>
-              Select feedback type
+              {f("typePlaceholder")}
             </option>
-            {FEEDBACK_TYPES.map((t) => (
-              <option key={t} value={t} className="text-gray-900">
-                {t}
+            {FEEDBACK_TYPES.map((type) => (
+              <option key={type} value={type} className="text-gray-900">
+                {f(`types.${type}`)}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="cf-subject" className={overline}>Subject</label>
-          <input id="cf-subject" data-testid="contact-subject" value={form.subject} onChange={update("subject")} className={fieldBase} placeholder="Optional" />
+          <label htmlFor="cf-subject" className={overline}>{f("subject")}</label>
+          <input id="cf-subject" data-testid="contact-subject" value={form.subject} onChange={update("subject")} className={fieldBase} placeholder={f("optional")} />
         </div>
         <div>
-          <label htmlFor="cf-name" className={overline}>Name *</label>
+          <label htmlFor="cf-name" className={overline}>{f("name")} *</label>
           <input id="cf-name" data-testid="contact-name" autoComplete="name" value={form.name} onChange={update("name")} className={fieldBase} required />
         </div>
         <div>
-          <label htmlFor="cf-email" className={overline}>Email *</label>
+          <label htmlFor="cf-email" className={overline}>{f("email")} *</label>
           <input id="cf-email" type="email" data-testid="contact-email" autoComplete="email" value={form.email} onChange={update("email")} className={fieldBase} required />
         </div>
         <div className="md:col-span-2">
-          <label htmlFor="cf-company" className={overline}>Company</label>
-          <input id="cf-company" data-testid="contact-company" autoComplete="organization" value={form.company} onChange={update("company")} className={fieldBase} placeholder="Optional" />
+          <label htmlFor="cf-company" className={overline}>{f("company")}</label>
+          <input id="cf-company" data-testid="contact-company" autoComplete="organization" value={form.company} onChange={update("company")} className={fieldBase} placeholder={f("optional")} />
         </div>
         <div className="md:col-span-2">
-          <label htmlFor="cf-message" className={overline}>Message *</label>
+          <label htmlFor="cf-message" className={overline}>{f("message")} *</label>
           <textarea
             id="cf-message"
             data-testid="contact-message"
             value={form.message}
             onChange={update("message")}
             className={`${fieldBase} min-h-[160px] resize-y`}
-            placeholder="How can we help?"
+            placeholder={f("messagePlaceholder")}
             required
           />
         </div>
@@ -106,7 +118,7 @@ export default function ContactMessageForm() {
 
       <div className="mt-8">
         <button type="submit" data-testid="contact-submit" disabled={status.state === "loading"} className="btn-primary disabled:opacity-60 disabled:cursor-not-allowed">
-          {status.state === "loading" ? "Sending…" : "Send Message"}
+          {status.state === "loading" ? f("sending") : f("submit")}
           <ArrowUpRight size={16} />
         </button>
       </div>

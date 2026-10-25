@@ -338,5 +338,48 @@
   "dfa": {
     "badge": "Free · No order required",
     "results": "Results within 24 hours"
+  },
+  "contact": {
+    "overline": "Contact · Request a Quote",
+    "title": "Ready to discuss your PCB assembly or prototype project?",
+    "body": "Drop your design files, choose a quantity and turnaround, and an engineer will reply with a quote or questions within 24 hours.",
+    "reach": "Reach us directly",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "hours": "Working Hours",
+    "notQuote": {
+      "title": "Not a quote?",
+      "body": "For order status, paperwork, or general questions, use our general contact form instead.",
+      "button": "General Contact Form"
+    }
+  },
+  "contactForm": {
+    "back": "Back to Home",
+    "overline": "Customer Service · Contact Form",
+    "title": "Send us a message.",
+    "body": "Have a suggestion, a comment, or a question? Use this form and we'll reply directly.",
+    "hoursLabel": "Working Hours:",
+    "form": {
+      "type": "Feedback Type",
+      "typePlaceholder": "Select feedback type",
+      "types": {
+        "Suggestion": "Suggestion",
+        "Comment": "Comment",
+        "Question": "Question"
+      },
+      "subject": "Subject",
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "message": "Message",
+      "optional": "Optional",
+      "messagePlaceholder": "How can we help?",
+      "required": "Please fill in all required fields.",
+      "success": "Thanks — we received your message and will reply directly.",
+      "failed": "Something went wrong. Please try again.",
+      "submit": "Send Message",
+      "sending": "Sending…"
+    }
   }
 }
