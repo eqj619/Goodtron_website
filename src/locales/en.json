@@ -12,7 +12,6 @@
   "nav": {
     "home": "Home",
     "services": "Services",
-    "about": "About Us",
     "support": "Support",
     "contact": "Contact Us"
   },
@@ -40,7 +39,110 @@
       "titleAfter": " Production.",
       "body": "Goodtron Electronics is a U.S.-based electronics assembly partner offering SMT and PCB assembly, prototype builds, and small-batch production — with responsive communication and practical, engineering-aware project support.",
       "detailLine": "{{detail}} — quotes back within 24 hours.",
-      "imgAlt": "Close-up of a professionally assembled printed circuit board"
+      "imgAlt": "Close-up of SMT components assembled on a blue circuit board"
+    },
+    "services": {
+      "overline": "Our Services",
+      "title": "A focused set of electronics assembly services.",
+      "body": "We concentrate on doing a small number of things carefully — SMT, PCB assembly, prototypes, and low-volume production runs — for hardware teams that want a responsive, engineering-aware partner.",
+      "link": "See full service details",
+      "items": {
+        "smt": {
+          "title": "SMT Assembly",
+          "body": "Surface-mount assembly on populated boards — from 0402 passives to fine-pitch ICs.",
+          "alt": "Close-up of a densely populated SMT board with fine-pitch components"
+        },
+        "pcb": {
+          "title": "PCB Assembly",
+          "body": "Full PCB assembly with careful BOM review and clear build documentation.",
+          "alt": "Fully assembled printed circuit board with populated components"
+        },
+        "prototype": {
+          "title": "Prototype Builds",
+          "body": "First-article and rev-A/rev-B prototypes handled with real engineering care.",
+          "alt": "Prototype board with jumper wires and multimeter during an early build"
+        },
+        "lowvolume": {
+          "title": "Low-Volume Production",
+          "body": "Small and mid-batch builds with consistent process notes and inspection.",
+          "alt": "Identical assembled boards lined up in a row"
+        }
+      }
+    },
+    "why": {
+      "overline": "Why Choose Goodtron",
+      "title": "Small team. Serious about your build.",
+      "items": {
+        "communication": {
+          "title": "Responsive communication",
+          "body": "Direct replies from the people actually coordinating your build — no ticket queues, no sales funnel.",
+          "alt": "Engineer leaning in to talk with a colleague working on a circuit board at the bench"
+        },
+        "prototype": {
+          "title": "Prototype & low-volume focus",
+          "body": "Small runs and single-board prototypes are what we're built for — not squeezed in around larger orders.",
+          "alt": "Prototype board with components laid out for a small-batch build"
+        },
+        "support": {
+          "title": "Practical assembly support",
+          "body": "BOM review, footprint sanity checks, and honest flags on risk items before they become problems.",
+          "alt": "Engineer reviewing a design at a workstation with a laptop and electronics"
+        },
+        "quality": {
+          "title": "Quality-minded workflow",
+          "body": "Documented process notes, visual inspection, and a careful handoff on every build we ship.",
+          "alt": "Close-up inspection of a populated printed circuit board"
+        }
+      }
+    },
+    "about": {
+      "overline": "About Goodtron",
+      "title": "Built for small builds. Serious about the work.",
+      "paragraphs": [
+        "Goodtron Electronics is a small, founder-led electronics assembly company based in Vista, California. We focus on SMT and PCB assembly for prototype and low-volume production — treating early-stage projects with the same care and documentation we apply to larger runs.",
+        "What we commit to today is responsive communication, careful project review, and practical execution on the builds we take on."
+      ],
+      "facts": [
+        [
+          "Location",
+          "Vista, CA"
+        ],
+        [
+          "Focus",
+          "Prototype & LV"
+        ],
+        [
+          "Team",
+          "Founder-led"
+        ]
+      ],
+      "gallery": [
+        "Yamaha YS12F SMT placement machine at Goodtron's Vista facility",
+        "Vitronics Soltec reflow oven at Goodtron",
+        "Microscope inspection and rework workstation at Goodtron"
+      ]
+    },
+    "support": {
+      "overline": "Support",
+      "title": "Two direct channels — customer service and technical support.",
+      "body": "Reach the right person from the start. Whether you're following up on an order or need engineering input on a build, we keep both paths open and responsive.",
+      "customer": {
+        "tag": "01 · Customer Service",
+        "title": "Customer Service",
+        "body": "Quote follow-ups, order status, delivery coordination, and any general inquiry about working with us. If you have a question about your project or paperwork, this is the right door.",
+        "contactForm": "Contact Form",
+        "quoteForm": "Quote Form"
+      },
+      "technical": {
+        "tag": "02 · Technical Support",
+        "title": "Technical Support",
+        "body": "BOM review questions, Gerber / design file issues, manufacturability feedback, and hands-on discussion of assembly, rework, or inspection details on your build."
+      }
+    },
+    "rfq": {
+      "overline": "Request a Quote",
+      "title": "Have a board to build? Get a quote in 24 hours.",
+      "body": "Drop your Gerber, BOM, and centroid files, pick a quantity and turnaround, and an engineer replies directly — no sales pressure."
     }
   },
   "trust": {
@@ -107,7 +209,6 @@
   "quote": {
     "title": "Request a Quote — reply within 24 hours",
     "body": "Send your Gerber, BOM, and centroid files with a target quantity and turnaround. Prototypes, ECO re-spins, and low-volume runs all welcome.",
-    "proof": "Recent quick-turn & complex SMT builds",
     "nextHeading": "What happens next",
     "next": [
       ["Engineer review", "Your files are reviewed by the people who will build the board — not a sales desk."],
@@ -116,56 +217,169 @@
     ],
     "talk": "Prefer to talk?"
   },
-  "about": {
-    "overline": "About Goodtron",
-    "title": "Engineering-First PCB Assembly & Prototyping",
-    "subtitle": "Bridging world-class high-speed manufacturing expertise with responsive, local Southern California agility.",
-    "heroAlt": "Yamaha SMT placement line at Goodtron's Vista, California facility",
-    "mission": {
-      "overline": "Our Mission",
-      "title": "Eliminating the friction between prototype design and assembly reality.",
-      "paragraphs": [
-        "Too many hardware schedules slip in the gap between a finished design and a working board — a footprint that doesn't match the part, a BOM line that went obsolete, a vendor queue that puts a ten-board prototype behind a ten-thousand-board order.",
-        "Goodtron exists to close that gap. Every build starts with an engineering review of your BOM and design for assembly, runs on our own SMT line in Vista, California, and is coordinated directly with the people placing your parts."
-      ],
-      "attributes": [
-        ["Vista, CA facility", "In-house SMT line in North San Diego County, close to Southern California hardware teams."],
-        ["24–72h quick-turns", "Prototype and ECO builds turned in days, not weeks."],
-        ["Engineering-first review", "Free BOM & DFA pre-checks before parts are bought or boards are built."],
-        ["Prototype & low-volume focus", "Small runs are our core business — never squeezed in around large orders."]
-      ]
+  "services": {
+    "hero": {
+      "overline": "Services",
+      "titleBefore": "Electronics assembly services built around ",
+      "highlight": "your project",
+      "titleAfter": ", not a production queue.",
+      "body": "Goodtron Electronics is a small, founder-led shop focused on SMT and PCB assembly for prototype and low-volume production. Below are the services we deliver in-house from Vista, California.",
+      "browse": "Browse Services"
     },
-    "leader": {
-      "overline": "Leadership",
-      "heading": "Meet the founder",
-      "name": "Daley Chak",
-      "title": "Founder & Technical Operations Lead",
-      "photoLabel": "Photo of Daley Chak coming soon",
-      "bio": [
-        "Daley is a veteran electronics manufacturing specialist whose career spans the global hardware manufacturing hub of Shenzhen, China, through to Southern California's tech ecosystem.",
-        "Daley brings deep hands-on expertise in surface-mount technology (SMT), high-speed pick-and-place operation on Yamaha SMT platforms, fine-pitch BGA and 0201 placement, and rigorous assembly quality standards.",
-        "Daley partners directly with hardware engineers, robotics developers, and medical device innovators to move designs from schematic to physical assembly without costly revisions."
-      ],
-      "expertise": "Expertise",
-      "tags": [
-        "Shenzhen Supply Chain & Manufacturing Veteran",
-        "SMT & DFA Optimization",
-        "Yamaha High-Speed SMT Specialist",
-        "Direct Engineering Support"
-      ]
+    "serviceTag": "Service {{tag}}",
+    "serviceTagDot": "Service · {{tag}}",
+    "startQuote": "Start a quote for {{title}}",
+    "blocks": {
+      "smt-assembly": {
+        "title": "SMT Assembly",
+        "intro": "Surface-mount assembly for modern board designs — from 0402 passives through fine-pitch ICs. Handled with careful setup, documented process notes, and post-reflow inspection.",
+        "bullets": [
+          "0402 passives through fine-pitch ICs",
+          "DEK stencil printing for solder paste",
+          "Lead-free reflow soldering",
+          "Documented setup and process notes",
+          "Post-reflow visual inspection"
+        ],
+        "imgAlt": "Close-up of a densely populated SMT board with fine-pitch components"
+      },
+      "pcb-assembly": {
+        "title": "PCB Assembly",
+        "intro": "Full PCBA support — from receiving your BOM and Gerber files to shipping a working, inspected board. We review carefully up front, so you don't get surprises later.",
+        "bullets": [
+          "BOM validation & footprint sanity checks",
+          "Long-lead part flagging on quote",
+          "Mixed SMT + through-hole builds",
+          "Visual inspection on every board",
+          "Clear traveler documentation"
+        ],
+        "imgAlt": "Fully assembled printed circuit board with populated components"
+      },
+      "prototype-builds": {
+        "title": "Prototype Builds",
+        "intro": "First-article and early-revision prototypes handled seriously — the same review, sourcing, and inspection process we apply to larger runs.",
+        "bullets": [
+          "Single-board and small first-article runs",
+          "Fast iteration between rev A → rev B",
+          "Engineering-aware questions on your BOM",
+          "Honest feedback on manufacturability"
+        ],
+        "imgAlt": "Prototype board with jumper wires and multimeter during an early build"
+      },
+      "low-volume-production": {
+        "title": "Low-Volume Production",
+        "intro": "Consistent small and mid-volume runs — the same process notes, documentation, and inspection on every board, so quality stays repeatable as you scale.",
+        "bullets": [
+          "Small and mid-batch production",
+          "Repeatable process notes & travelers",
+          "Coordinated build planning",
+          "Visual inspection & final QC"
+        ],
+        "imgAlt": "Identical assembled boards lined up in a row"
+      },
+      "through-hole-mixed": {
+        "title": "Through-Hole & Mixed-Technology Support",
+        "intro": "Mixed and hand-soldered assembly — connectors, power components, and boards that combine SMT with through-hole parts on the same build.",
+        "bullets": [
+          "Hand-soldered through-hole assembly",
+          "Mixed SMT + THT builds",
+          "Hot-air rework on populated boards",
+          "Microscope inspection for fine-pitch"
+        ],
+        "imgAlt": "Hand soldering a through-hole component onto a populated PCB"
+      }
     },
-    "values": {
-      "overline": "Why Goodtron",
-      "heading": "What you can count on.",
-      "items": [
-        ["Direct Engineering Communication", "No sales middlemen — talk directly to the manufacturing specialists building your boards."],
-        ["Fast-Turn Agility", "A local California facility built for quick iterations and ECO revisions."],
-        ["Zero-Defect Commitment", "AOI, X-ray inspection, and IPC-A-610 Class 2/3 alignment on every build."]
-      ]
+    "quality": {
+      "overline": "Quality & Inspection",
+      "title": "Every board inspected. Standards you can specify.",
+      "body": "Prototype speed doesn't mean skipping inspection. Tell us the class and compliance context on your RFQ and we build and inspect to it.",
+      "groups": {
+        "Inspection": "Inspection",
+        "Standards": "Standards"
+      }
+    },
+    "equipment": {
+      "overline": "Production Capability",
+      "title": "Our SMT line & equipment.",
+      "body": "The equipment behind the services above — flexible enough for small prototype runs and repeatable enough for low-volume production.",
+      "items": {
+        "yamaha-ys12": {
+          "name": "Yamaha YS12",
+          "role": "Mid-speed SMT placement",
+          "body": "Handles a broad component range from 0402 passives to fine-pitch ICs — well-suited to prototype and low-volume PCB assembly runs.",
+          "alt": "Yamaha YS12 SMT placement machine"
+        },
+        "yamaha-ys12f": {
+          "name": "Yamaha YS12F",
+          "role": "Flexible SMT placement",
+          "body": "Second placement head paired with the YS12 to support mixed builds and give us flexibility across different board sizes and setups.",
+          "alt": "Yamaha YS12F flexible SMT placement machine"
+        },
+        "vitronics-soltec-reflow": {
+          "name": "Vitronics Soltec Reflow",
+          "role": "Lead-free reflow soldering",
+          "body": "Controlled, lead-free-compatible reflow profiles for reliable solder joints on both prototype and small-batch builds.",
+          "alt": "Vitronics Soltec reflow oven"
+        },
+        "inspection-rework": {
+          "name": "Inspection & Rework",
+          "role": "Microscope inspection and rework",
+          "body": "Digital microscope stations for fine-pitch inspection and a hot-air rework setup for touch-ups on populated boards.",
+          "alt": "Microscope inspection and rework workstation"
+        }
+      }
     },
     "cta": {
-      "title": "Talk to the people who will build your boards.",
-      "body": "Send your files for a quote or a free BOM & DFA review — an engineer replies within 24 hours."
+      "overline": "Not sure which service fits?",
+      "title": "Send what you have. We'll help scope the right path.",
+      "body": "BOM, Gerber files, a short description — anything works as a starting point. We reply directly, not through a sales funnel.",
+      "button": "Request a Quote"
+    }
+  },
+  "dfa": {
+    "badge": "Free · No order required",
+    "results": "Results within 24 hours"
+  },
+  "contact": {
+    "overline": "Contact · Request a Quote",
+    "title": "Ready to discuss your PCB assembly or prototype project?",
+    "body": "Drop your design files, choose a quantity and turnaround, and an engineer will reply with a quote or questions within 24 hours.",
+    "reach": "Reach us directly",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "hours": "Working Hours",
+    "notQuote": {
+      "title": "Not a quote?",
+      "body": "For order status, paperwork, or general questions, use our general contact form instead.",
+      "button": "General Contact Form"
+    }
+  },
+  "contactForm": {
+    "back": "Back to Home",
+    "overline": "Customer Service · Contact Form",
+    "title": "Send us a message.",
+    "body": "Have a suggestion, a comment, or a question? Use this form and we'll reply directly.",
+    "hoursLabel": "Working Hours:",
+    "form": {
+      "type": "Feedback Type",
+      "typePlaceholder": "Select feedback type",
+      "types": {
+        "Suggestion": "Suggestion",
+        "Comment": "Comment",
+        "Question": "Question"
+      },
+      "subject": "Subject",
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "message": "Message",
+      "optional": "Optional",
+      "messagePlaceholder": "How can we help?",
+      "required": "Please fill in all required fields.",
+      "success": "Thanks — we received your message and will reply directly.",
+      "failed": "Something went wrong. Please try again.",
+      "submit": "Send Message",
+      "sending": "Sending…"
     }
   }
 }

@@ -15,13 +15,12 @@ export const SITE = {
 export const NAV = [
   { to: "/", key: "home", label: "Home" },
   { to: "/services", key: "services", label: "Services" },
-  { to: "/about", key: "about", label: "About Us" },
   { to: "/#support", key: "support", label: "Support" },
   { to: "/contact", key: "contact", label: "Contact Us" },
 ];
 
 export const PCB_IMAGES = {
-  hero: "/assets/pcb-3.jpg",
+  hero: "/assets/hero-smt.jpg",
   smt: "/assets/pcb-1.jpg",
   pcb: "/assets/pcb-2.jpg",
   prototype: "/assets/pcb-4.jpg",
@@ -215,44 +214,6 @@ export const QUALITY_BADGES = [
     body: "U.S.-only facility and staff with controlled handling of design data for defense and aerospace prototype work.",
   },
 ];
-
-export const CASE_STUDIES = [
-  {
-    key: "medtech",
-    sector: "MedTech · Quick-Turn",
-    title: "48-hour prototype run for a biomedical device startup",
-    body: "Assembled 25 multi-layer prototype boards in 48 hours for a San Diego biomedical device startup, keeping their clinical-demo schedule on track.",
-    metrics: [
-      { value: "48-Hour", label: "Turn" },
-      { value: "25", label: "Multi-layer boards" },
-    ],
-    img: "/assets/pcb-4.jpg",
-    alt: "Multi-layer prototype PCB assembled for a medical device",
-  },
-  {
-    key: "robotics",
-    sector: "Robotics · Complex SMT",
-    title: "Fine-pitch 0201 & BGA placement for robotics testing",
-    body: "Handled fine-pitch 0201 passives and BGA placement with 100% X-ray verification so the customer's robotics test campaign started on known-good hardware.",
-    metrics: [
-      { value: "100%", label: "X-ray verified" },
-      { value: "0201 & BGA", label: "Ready" },
-    ],
-    img: "/assets/pcb-1.jpg",
-    alt: "Densely populated robotics control board with BGA and 0201 components",
-  },
-];
-
-// Set approved: true only for a real customer quote with permission to publish.
-// Unapproved testimonials render in local development only.
-export const TESTIMONIAL = {
-  approved: false,
-  quote:
-    "We talked directly with the engineer building our boards — questions came back the same day, and the boards were on our bench in Carlsbad on the date they promised.",
-  name: "Hardware Engineering Lead",
-  company: "Southern California robotics company",
-  metric: { value: "Zero", label: "Defects at incoming inspection" },
-};
 
 export const DFA_REVIEW = {
   title: "Free Pre-Build BOM & DFA Risk Review",

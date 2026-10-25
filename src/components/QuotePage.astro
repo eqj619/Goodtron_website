@@ -1,0 +1,76 @@
+---
+import { Zap, Mail, Phone, Clock } from "lucide-react";
+import Base from "@/layouts/Base.astro";
+import RfqIsland from "@/islands/RfqIsland.jsx";
+import { SITE, QUICK_TURN, DFA_REVIEW } from "@/lib/site";
+import { getI18n } from "@/i18n/core";
+
+interface Props {
+  lang: string;
+  /** Free BOM & DFA review landing variant. */
+  dfa?: boolean;
+}
+
+const { lang, dfa = false } = Astro.props;
+const { t, tl } = getI18n(lang);
+const title = dfa ? t("dfa.title", { defaultValue: DFA_REVIEW.title }) : t("common.getQuote");
+const description = dfa ? t("dfa.pitch", { defaultValue: DFA_REVIEW.pitch }) : t("quote.body");
+---
+
+<Base lang={lang} path={dfa ? "/dfa-review" : "/quote"} title={title} description={description}>
+  <div data-testid="page-quote">
+    <section class="relative border-b border-gray-200 bg-white">
+      <div class="absolute inset-0 gt-grid-bg opacity-50 pointer-events-none"></div>
+      <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+        <p class="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 text-sm font-bold mb-6">
+          <Zap size={16} aria-hidden="true" /> {t("quickTurn.headline", { defaultValue: QUICK_TURN.headline })}
+        </p>
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-[60px] leading-[1.05] tracking-tight font-semibold text-gray-900 max-w-4xl">
+          {dfa ? t("dfa.title", { defaultValue: DFA_REVIEW.title }) : t("quote.title")}
+        </h1>
+        <p class="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl">
+          {dfa ? t("dfa.pitch", { defaultValue: DFA_REVIEW.pitch }) : t("quote.body")}
+        </p>
+      </div>
+    </section>
+
+    <section class="border-b border-gray-200 bg-white">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-8">
+            <RfqIsland client:load lang={lang} defaultDfa={dfa} testId="quote-rfq" />
+          </div>
+          <aside class="lg:col-span-4 space-y-6">
+            <div class="border border-gray-200 p-7">
+              <h2 class="text-sm tracking-widest uppercase font-bold text-red-600 mb-5">{t("quote.nextHeading")}</h2>
+              <ol class="space-y-5">
+                {tl("quote.next").map(([title, d], i) => (
+                  <li class="flex gap-4">
+                    <span class="font-mono text-sm text-red-600 pt-0.5">0{i + 1}</span>
+                    <div>
+                      <div class="font-semibold text-gray-900">{title}</div>
+                      <div class="mt-1 text-sm text-gray-600 leading-relaxed">{d}</div>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div class="border border-gray-200 bg-[#F9FAFB] p-7 space-y-3 text-[15px]">
+              <h2 class="text-sm tracking-widest uppercase font-bold text-red-600 mb-2">{t("quote.talk")}</h2>
+              <a href={`tel:${SITE.phoneHref}`} class="flex items-center gap-3 text-gray-900 hover:text-red-600">
+                <Phone size={15} className="text-red-600" aria-hidden="true" /> {SITE.phone}
+              </a>
+              <a href={`mailto:${SITE.email}`} class="flex items-center gap-3 text-gray-900 hover:text-red-600">
+                <Mail size={15} className="text-red-600" aria-hidden="true" /> {SITE.email}
+              </a>
+              <div class="flex items-start gap-3 text-gray-700">
+                <Clock size={15} className="text-red-600 mt-1 shrink-0" aria-hidden="true" />{" "}
+                {t("site.hours", { defaultValue: SITE.hours })}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

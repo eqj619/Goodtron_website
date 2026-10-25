@@ -1,0 +1,13 @@
+// Demo deploy: static files only, served by Cloudflare Workers static assets.
+// Kept in its own folder so Wrangler never auto-configures the Astro project
+// (running it from the repo root rewrites astro.config.mjs into SSR mode).
+{
+  "name": "goodtron-demo",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "../../dist",
+    "not_found_handling": "404-page"
+  }
+}
