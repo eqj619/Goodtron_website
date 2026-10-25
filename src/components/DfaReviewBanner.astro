@@ -1,10 +1,11 @@
 ---
 import { ArrowUpRight, CalendarClock, PackageSearch, Ruler, Clock } from "lucide-react";
 import { DFA_REVIEW } from "@/lib/site";
-import { localePath } from "@/i18n/core";
+import { getI18n } from "@/i18n/core";
 
-// English only.
+// English copy comes from site.js; ja/zh from the dfa.* keys.
 const { lang } = Astro.props;
+const { t, href } = getI18n(lang);
 const BENEFIT_ICONS = [CalendarClock, Ruler, PackageSearch];
 ---
 
@@ -12,7 +13,6 @@ const BENEFIT_ICONS = [CalendarClock, Ruler, PackageSearch];
   id="dfa-review"
   aria-labelledby="dfa-review-title"
   data-testid="section-dfa-review"
-  lang={lang !== "en" ? "en" : undefined}
   class="relative overflow-hidden bg-[#0A0A0A] text-white scroll-mt-32"
 >
   <div class="absolute inset-0 gt-grid-bg-dark opacity-40 pointer-events-none"></div>
@@ -20,18 +20,18 @@ const BENEFIT_ICONS = [CalendarClock, Ruler, PackageSearch];
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       <div class="lg:col-span-6">
         <div class="inline-flex items-center gap-2 border border-red-500 text-red-400 px-3 py-1 text-xs font-bold uppercase tracking-widest">
-          Free · No order required
+          {t("dfa.badge")}
         </div>
         <h2 id="dfa-review-title" class="mt-6 font-display text-3xl lg:text-[44px] tracking-tight font-semibold leading-[1.1]">
-          {DFA_REVIEW.title}
+          {t("dfa.title", { defaultValue: DFA_REVIEW.title })}
         </h2>
-        <p class="mt-5 text-lg text-gray-300 leading-relaxed">{DFA_REVIEW.pitch}</p>
+        <p class="mt-5 text-lg text-gray-300 leading-relaxed">{t("dfa.pitch", { defaultValue: DFA_REVIEW.pitch })}</p>
         <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a href={localePath(lang, "/dfa-review")} data-testid="dfa-cta" class="btn-primary">
-            {DFA_REVIEW.cta} <ArrowUpRight size={16} />
+          <a href={href("/dfa-review")} data-testid="dfa-cta" class="btn-primary">
+            {t("dfa.cta", { defaultValue: DFA_REVIEW.cta })} <ArrowUpRight size={16} />
           </a>
           <span class="inline-flex items-center gap-2 text-sm text-gray-400">
-            <Clock size={14} aria-hidden="true" /> Results within 24 hours
+            <Clock size={14} aria-hidden="true" /> {t("dfa.results")}
           </span>
         </div>
       </div>
@@ -45,8 +45,8 @@ const BENEFIT_ICONS = [CalendarClock, Ruler, PackageSearch];
                   <Icon size={18} aria-hidden="true" />
                 </div>
                 <div>
-                  <div class="font-semibold text-white">{b.t}</div>
-                  <div class="mt-1 text-[15px] text-gray-400 leading-relaxed">{b.d}</div>
+                  <div class="font-semibold text-white">{t(`dfa.benefits.${i}.t`, { defaultValue: b.t })}</div>
+                  <div class="mt-1 text-[15px] text-gray-400 leading-relaxed">{t(`dfa.benefits.${i}.d`, { defaultValue: b.d })}</div>
                 </div>
               </li>
             );

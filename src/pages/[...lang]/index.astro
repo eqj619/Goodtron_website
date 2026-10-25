@@ -26,71 +26,34 @@ import { getI18n, localeStaticPaths, langFromParams } from "@/i18n/core";
 export const getStaticPaths = localeStaticPaths;
 
 const lang = langFromParams(Astro.params);
-const { t, href } = getI18n(lang);
-// Sections not yet translated are marked English for screen readers and search engines.
-const enLang = lang !== "en" ? "en" : undefined;
+const { t, tl, href } = getI18n(lang);
 
+// Text for each card lives in src/locales/*.json under home.services.items / home.why.items.
 const CORE_SERVICES = [
-  {
-    icon: CircuitBoard,
-    title: "SMT Assembly",
-    body: "Surface-mount assembly on populated boards — from 0402 passives to fine-pitch ICs.",
-    img: "/assets/pcb-3.jpg",
-    alt: "Close-up of a densely populated SMT board with fine-pitch components",
-  },
-  {
-    icon: Cpu,
-    title: "PCB Assembly",
-    body: "Full PCB assembly with careful BOM review and clear build documentation.",
-    img: "/assets/pcb-1.jpg",
-    alt: "Fully assembled printed circuit board with populated components",
-  },
-  {
-    icon: Layers,
-    title: "Prototype Builds",
-    body: "First-article and rev-A/rev-B prototypes handled with real engineering care.",
-    img: "/assets/about-2.jpg",
-    alt: "Prototype board with jumper wires and multimeter during an early build",
-  },
-  {
-    icon: Boxes,
-    title: "Low-Volume Production",
-    body: "Small and mid-batch builds with consistent process notes and inspection.",
-    img: "/assets/low-volume.jpg",
-    alt: "Identical assembled boards lined up in a row",
-  },
-];
+  { key: "smt", icon: CircuitBoard, img: "/assets/pcb-3.jpg" },
+  { key: "pcb", icon: Cpu, img: "/assets/pcb-1.jpg" },
+  { key: "prototype", icon: Layers, img: "/assets/about-2.jpg" },
+  { key: "lowvolume", icon: Boxes, img: "/assets/low-volume.jpg" },
+].map((s) => ({
+  ...s,
+  title: t(`home.services.items.${s.key}.title`),
+  body: t(`home.services.items.${s.key}.body`),
+  alt: t(`home.services.items.${s.key}.alt`),
+}));
 
 const WHY = [
-  {
-    icon: MessageSquare,
-    t: "Responsive communication",
-    d: "Direct replies from the people actually coordinating your build — no ticket queues, no sales funnel.",
-    img: PCB_IMAGES.whyCommunication,
-    alt: "Engineer leaning in to talk with a colleague working on a circuit board at the bench",
-  },
-  {
-    icon: Zap,
-    t: "Prototype & low-volume focus",
-    d: "Small runs and single-board prototypes are what we're built for — not squeezed in around larger orders.",
-    img: PCB_IMAGES.whyPrototype,
-    alt: "Prototype board with components laid out for a small-batch build",
-  },
-  {
-    icon: ClipboardCheck,
-    t: "Practical assembly support",
-    d: "BOM review, footprint sanity checks, and honest flags on risk items before they become problems.",
-    img: PCB_IMAGES.whyReview,
-    alt: "Engineer reviewing a design at a workstation with a laptop and electronics",
-  },
-  {
-    icon: ShieldCheck,
-    t: "Quality-minded workflow",
-    d: "Documented process notes, visual inspection, and a careful handoff on every build we ship.",
-    img: PCB_IMAGES.whyInspection,
-    alt: "Close-up inspection of a populated printed circuit board",
-  },
-];
+  { key: "communication", icon: MessageSquare, img: PCB_IMAGES.whyCommunication },
+  { key: "prototype", icon: Zap, img: PCB_IMAGES.whyPrototype },
+  { key: "support", icon: ClipboardCheck, img: PCB_IMAGES.whyReview },
+  { key: "quality", icon: ShieldCheck, img: PCB_IMAGES.whyInspection },
+].map((v) => ({
+  ...v,
+  t: t(`home.why.items.${v.key}.title`),
+  d: t(`home.why.items.${v.key}.body`),
+  alt: t(`home.why.items.${v.key}.alt`),
+}));
+
+const GALLERY = ["/assets/facility-ys12f.jpg", "/assets/facility-reflow.jpg", "/assets/facility-4.jpg"];
 ---
 
 <Base lang={lang} path="/">
@@ -171,22 +134,20 @@ const WHY = [
     <TrustBar lang={lang} />
 
     <!-- CORE SERVICES -->
-    <section class="border-b border-gray-200 bg-white" data-testid="section-core-services" lang={enLang}>
+    <section class="border-b border-gray-200 bg-white" data-testid="section-core-services">
       <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
           <div class="lg:col-span-5">
             <div class="text-sm md:text-[15px] tracking-widest text-red-600 uppercase font-bold mb-4">
-              Our Services
+              {t("home.services.overline")}
             </div>
             <h2 class="font-display text-4xl lg:text-5xl tracking-tight font-semibold text-gray-900 leading-[1.1]">
-              A focused set of electronics assembly services.
+              {t("home.services.title")}
             </h2>
           </div>
           <div class="lg:col-span-7">
             <p class="text-lg lg:text-xl text-gray-600 leading-relaxed">
-              We concentrate on doing a small number of things carefully — SMT,
-              PCB assembly, prototypes, and low-volume production runs — for
-              hardware teams that want a responsive, engineering-aware partner.
+              {t("home.services.body")}
             </p>
           </div>
         </div>
@@ -231,7 +192,7 @@ const WHY = [
             data-testid="core-services-link"
             class="inline-flex items-center gap-2 text-sm font-medium text-gray-900 border-b border-gray-900 pb-1 hover:text-red-600 hover:border-red-600 transition-colors"
           >
-            See full service details <ArrowRight size={16} />
+            {t("home.services.link")} <ArrowRight size={16} />
           </a>
         </div>
       </div>
@@ -240,14 +201,14 @@ const WHY = [
     <DfaReviewBanner lang={lang} />
 
     <!-- WHY / CAPABILITIES -->
-    <section class="border-b border-gray-200 bg-white" data-testid="section-why" lang={enLang}>
+    <section class="border-b border-gray-200 bg-white" data-testid="section-why">
       <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
         <div class="max-w-3xl mb-16">
           <div class="text-sm md:text-[15px] tracking-widest text-black uppercase font-bold mb-4">
-            Why Choose Goodtron
+            {t("home.why.overline")}
           </div>
           <h2 class="text-4xl lg:text-5xl tracking-tight font-semibold text-black leading-[1.1]">
-            Small team. Serious about your build.
+            {t("home.why.title")}
           </h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -285,36 +246,21 @@ const WHY = [
     </section>
 
     <!-- SHORT COMPANY INTRO -->
-    <section class="border-b border-gray-200 bg-white" data-testid="section-about" lang={enLang}>
+    <section class="border-b border-gray-200 bg-white" data-testid="section-about">
       <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
           <div class="lg:col-span-6">
             <div class="text-sm md:text-[15px] tracking-widest text-red-600 uppercase font-bold mb-4">
-              About Goodtron
+              {t("home.about.overline")}
             </div>
             <h2 class="font-display text-4xl lg:text-5xl tracking-tight font-semibold text-gray-900 leading-[1.1]">
-              Built for small builds. Serious about the work.
+              {t("home.about.title")}
             </h2>
             <div class="mt-8 space-y-5 text-lg text-gray-600 leading-relaxed">
-              <p>
-                Goodtron Electronics is a small, founder-led electronics
-                assembly company based in Vista, California. We focus on SMT
-                and PCB assembly for prototype and low-volume production —
-                treating early-stage projects with the same care and
-                documentation we apply to larger runs.
-              </p>
-              <p>
-                What we commit to today is responsive communication, careful
-                project review, and practical execution on the builds we take
-                on.
-              </p>
+              {tl("home.about.paragraphs").map((p) => <p>{p}</p>)}
             </div>
             <div class="mt-10 grid grid-cols-3 gap-6 max-w-md">
-              {[
-                ["Location", "Vista, CA"],
-                ["Focus", "Prototype & LV"],
-                ["Team", "Founder-led"],
-              ].map(([k, v]) => (
+              {tl("home.about.facts").map(([k, v]) => (
                 <div class="border-l-2 border-red-600 pl-4">
                   <div class="text-xs tracking-widest text-red-600 uppercase font-bold">{k}</div>
                   <div class="mt-1 text-gray-900 text-sm font-medium">{v}</div>
@@ -326,12 +272,8 @@ const WHY = [
           <div class="lg:col-span-6">
             <div class="grid grid-cols-2 gap-4">
               {/* Goodtron's own facility photos (the stock board photos already appear in the service cards). */}
-              {[
-                ["/assets/facility-ys12f.jpg", "Yamaha YS12F SMT placement machine at Goodtron's Vista facility"],
-                ["/assets/facility-reflow.jpg", "Vitronics Soltec reflow oven at Goodtron"],
-                ["/assets/facility-4.jpg", "Microscope inspection and rework workstation at Goodtron"],
-              ].map(
-                ([src, alt], i) => (
+              {GALLERY.map(
+                (src, i) => (
                   <div
                     class={`overflow-hidden border border-gray-200 ${
                       i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"
@@ -339,7 +281,7 @@ const WHY = [
                   >
                     <img
                       src={src}
-                      alt={alt}
+                      alt={tl("home.about.gallery")[i]}
                       loading="lazy"
                       class="w-full h-full object-cover"
                     />
@@ -353,19 +295,17 @@ const WHY = [
     </section>
 
     <!-- SUPPORT -->
-    <section id="support" class="border-b border-gray-200 bg-[#F9FAFB] scroll-mt-32" data-testid="section-support" lang={enLang}>
+    <section id="support" class="border-b border-gray-200 bg-[#F9FAFB] scroll-mt-32" data-testid="section-support">
       <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
         <div class="max-w-3xl mb-16">
           <div class="text-sm md:text-[15px] tracking-widest text-black uppercase font-bold mb-4">
-            Support
+            {t("home.support.overline")}
           </div>
           <h2 class="text-4xl lg:text-5xl tracking-tight font-semibold text-black leading-[1.1]">
-            Two direct channels — customer service and technical support.
+            {t("home.support.title")}
           </h2>
           <p class="mt-5 text-lg text-black/80 leading-relaxed">
-            Reach the right person from the start. Whether you&apos;re following up
-            on an order or need engineering input on a build, we keep both
-            paths open and responsive.
+            {t("home.support.body")}
           </p>
         </div>
 
@@ -378,15 +318,13 @@ const WHY = [
               <Headphones size={20} />
             </div>
             <div class="text-xs tracking-[0.18em] uppercase text-black/70 font-semibold mb-3">
-              01 · Customer Service
+              {t("home.support.customer.tag")}
             </div>
             <h3 class="text-2xl font-semibold text-black">
-              Customer Service
+              {t("home.support.customer.title")}
             </h3>
             <p class="mt-4 text-[15px] text-black/80 leading-relaxed">
-              Quote follow-ups, order status, delivery coordination, and any
-              general inquiry about working with us. If you have a question
-              about your project or paperwork, this is the right door.
+              {t("home.support.customer.body")}
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
               <a
@@ -394,14 +332,14 @@ const WHY = [
                 data-testid="support-customer-contact"
                 class="btn-primary"
               >
-                Contact Form <ArrowUpRight size={14} />
+                {t("home.support.customer.contactForm")} <ArrowUpRight size={14} />
               </a>
               <a
                 href={href("/quote")}
                 data-testid="support-customer-quote"
                 class="btn-secondary"
               >
-                Quote Form <ArrowUpRight size={14} />
+                {t("home.support.customer.quoteForm")} <ArrowUpRight size={14} />
               </a>
             </div>
             <div class="mt-6 pt-5 border-t border-gray-200 space-y-2">
@@ -432,15 +370,13 @@ const WHY = [
               <Wrench size={20} />
             </div>
             <div class="text-xs tracking-[0.18em] uppercase text-black/70 font-semibold mb-3">
-              02 · Technical Support
+              {t("home.support.technical.tag")}
             </div>
             <h3 class="text-2xl font-semibold text-black">
-              Technical Support
+              {t("home.support.technical.title")}
             </h3>
             <p class="mt-4 text-[15px] text-black/80 leading-relaxed">
-              BOM review questions, Gerber / design file issues, manufacturability
-              feedback, and hands-on discussion of assembly, rework, or
-              inspection details on your build.
+              {t("home.support.technical.body")}
             </p>
             <div class="mt-8 space-y-3">
               <a
@@ -470,16 +406,15 @@ const WHY = [
       <div class="absolute inset-0 gt-grid-bg-dark opacity-40 pointer-events-none"></div>
       <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-28">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div class="lg:col-span-4 text-white" lang={enLang}>
+          <div class="lg:col-span-4 text-white">
             <div class="text-sm md:text-[15px] tracking-widest text-red-500 uppercase font-bold mb-4">
-              Request a Quote
+              {t("home.rfq.overline")}
             </div>
             <h2 class="font-display text-3xl lg:text-5xl tracking-tight font-semibold leading-tight">
-              Have a board to build? Get a quote in 24 hours.
+              {t("home.rfq.title")}
             </h2>
             <p class="mt-5 text-gray-400 text-lg leading-relaxed">
-              Drop your Gerber, BOM, and centroid files, pick a quantity and
-              turnaround, and an engineer replies directly — no sales pressure.
+              {t("home.rfq.body")}
             </p>
             <div class="mt-8 text-sm text-gray-400 font-mono tracking-wider space-y-1">
               <div>{SITE.email}</div>
