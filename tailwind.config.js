@@ -1,8 +1,6 @@
-import animate from "tailwindcss-animate";
-
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ["./src/**/*.{astro,js,jsx}"],
   theme: {
     extend: {
       borderRadius: {
@@ -26,5 +24,5 @@ export default {
       },
     },
   },
-  plugins: [animate],
+  plugins: [],
 };

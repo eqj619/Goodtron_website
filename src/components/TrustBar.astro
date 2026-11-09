@@ -1,0 +1,33 @@
+---
+import { QUALITY_BADGES } from "@/lib/site";
+import { getI18n } from "@/i18n/core";
+import { QUALITY_ICONS } from "@/components/qualityIcons";
+
+const { lang } = Astro.props;
+const { t } = getI18n(lang);
+---
+
+<section aria-label={t("trust.aria")} data-testid="trust-bar" class="border-b border-gray-200 bg-[#F9FAFB]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-8">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-6">
+      {
+        QUALITY_BADGES.map((b) => {
+          const Icon = QUALITY_ICONS[b.key];
+          return (
+            <li class="flex items-start gap-3" data-testid={`trust-${b.key}`}>
+              <div class="w-10 h-10 shrink-0 border border-gray-300 bg-white flex items-center justify-center text-gray-900">
+                <Icon size={18} aria-hidden="true" />
+              </div>
+              <div class="min-w-0">
+                <div class="text-[15px] font-bold text-gray-900 leading-tight">
+                  {t(`trust.${b.key}.label`, { defaultValue: b.label })}
+                </div>
+                <div class="mt-1 text-xs text-gray-600 leading-snug">{t(`trust.${b.key}.micro`, { defaultValue: b.micro })}</div>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>

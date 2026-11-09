@@ -15,13 +15,12 @@ export const SITE = {
 export const NAV = [
   { to: "/", key: "home", label: "Home" },
   { to: "/services", key: "services", label: "Services" },
-  { to: "/about", key: "about", label: "About Us" },
   { to: "/#support", key: "support", label: "Support" },
   { to: "/contact", key: "contact", label: "Contact Us" },
 ];
 
 export const PCB_IMAGES = {
-  hero: "/assets/pcb-3.jpg",
+  hero: "/assets/hero-smt.jpg",
   smt: "/assets/pcb-1.jpg",
   pcb: "/assets/pcb-2.jpg",
   prototype: "/assets/pcb-4.jpg",
@@ -171,16 +170,16 @@ export const QUALITY_BADGES = [
     group: "Inspection",
     label: "AOI",
     title: "Automated Optical Inspection",
-    micro: "Checks placement, polarity & solder joints",
-    body: "Automated optical inspection after reflow catches missing, shifted, or reversed parts and solder defects before boards leave the line.",
+    micro: "Checks parts, polarity & visible solder",
+    body: "MIRTEC AOI checks assembled boards for missing or incorrect components, placement and polarity, and visible solder anomalies.",
   },
   {
     key: "xray",
     group: "Inspection",
     label: "X-Ray",
     title: "X-Ray Inspection",
-    micro: "Verifies hidden BGA / QFN joints",
-    body: "X-ray verification of BGA, QFN, and other bottom-terminated packages where solder joints can't be seen optically.",
+    micro: "Reviews hidden BGA joints",
+    body: "A Comet FeinFocus Cougar X-ray system gives targeted, non-destructive review of BGA solder-ball patterns, suspected bridging or voiding, and other joints optical cameras can't see.",
   },
   {
     key: "visual",
@@ -191,68 +190,30 @@ export const QUALITY_BADGES = [
     body: "Digital-microscope inspection of fine-pitch leads, 0201 passives, and reworked joints by the people who built the board.",
   },
   {
-    key: "ipc",
-    group: "Standards",
-    label: "IPC-A-610",
-    title: "IPC-A-610 Class 2 & Class 3",
-    micro: "Workmanship to Class 2 or Class 3 on request",
-    body: "Builds inspected to IPC-A-610 acceptability criteria — Class 2 by default, Class 3 for high-reliability products when specified on the RFQ.",
+    key: "iso9001",
+    group: "Process",
+    label: "ISO 9001",
+    title: "ISO 9001 Certification in Progress",
+    micro: "Quality management certification underway",
+    body: "We are working toward ISO 9001 certification of our quality management system.",
   },
   {
-    key: "iso13485",
-    group: "Standards",
-    label: "ISO 13485",
-    title: "ISO 13485-Aligned Process",
-    micro: "MedTech-ready documentation & traceability",
-    body: "Process documentation, lot traceability, and travelers aligned with ISO 13485 expectations for medical-device prototypes.",
+    key: "gates",
+    group: "Process",
+    label: "Quality Gates",
+    title: "Three Quality Gates",
+    micro: "Pre-build, in-process & final checks",
+    body: "Assembly files and requirements are reviewed before the build, placement and soldering are checked during it, and boards get final verification with AOI and targeted X-ray as needed.",
   },
   {
-    key: "itar",
-    group: "Standards",
-    label: "ITAR",
-    title: "ITAR / Defense Prototyping Readiness",
-    micro: "U.S.-based build & controlled data handling",
-    body: "U.S.-only facility and staff with controlled handling of design data for defense and aerospace prototype work.",
+    key: "cleaning",
+    group: "Process",
+    label: "Aqueous Cleaning",
+    title: "Aqueous PCB Cleaning",
+    micro: "Flux-residue removal where compatible",
+    body: "A Trident aqueous cleaning system removes flux residue when the board and flux chemistry allow it.",
   },
 ];
-
-export const CASE_STUDIES = [
-  {
-    key: "medtech",
-    sector: "MedTech · Quick-Turn",
-    title: "48-hour prototype run for a biomedical device startup",
-    body: "Assembled 25 multi-layer prototype boards in 48 hours for a San Diego biomedical device startup, keeping their clinical-demo schedule on track.",
-    metrics: [
-      { value: "48-Hour", label: "Turn" },
-      { value: "25", label: "Multi-layer boards" },
-    ],
-    img: "/assets/pcb-4.jpg",
-    alt: "Multi-layer prototype PCB assembled for a medical device",
-  },
-  {
-    key: "robotics",
-    sector: "Robotics · Complex SMT",
-    title: "Fine-pitch 0201 & BGA placement for robotics testing",
-    body: "Handled fine-pitch 0201 passives and BGA placement with 100% X-ray verification so the customer's robotics test campaign started on known-good hardware.",
-    metrics: [
-      { value: "100%", label: "X-ray verified" },
-      { value: "0201 & BGA", label: "Ready" },
-    ],
-    img: "/assets/pcb-1.jpg",
-    alt: "Densely populated robotics control board with BGA and 0201 components",
-  },
-];
-
-// Set approved: true only for a real customer quote with permission to publish.
-// Unapproved testimonials render in local development only.
-export const TESTIMONIAL = {
-  approved: false,
-  quote:
-    "We talked directly with the engineer building our boards — questions came back the same day, and the boards were on our bench in Carlsbad on the date they promised.",
-  name: "Hardware Engineering Lead",
-  company: "Southern California robotics company",
-  metric: { value: "Zero", label: "Defects at incoming inspection" },
-};
 
 export const DFA_REVIEW = {
   title: "Free Pre-Build BOM & DFA Risk Review",

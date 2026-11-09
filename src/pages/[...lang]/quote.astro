@@ -1,0 +1,8 @@
+---
+import QuotePage from "@/components/QuotePage.astro";
+import { localeStaticPaths, langFromParams } from "@/i18n/core";
+
+export const getStaticPaths = localeStaticPaths;
+---
+
+<QuotePage lang={langFromParams(Astro.params)} />

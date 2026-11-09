@@ -1,0 +1,431 @@
+---
+import {
+  ArrowUpRight,
+  ArrowRight,
+  CircuitBoard,
+  Cpu,
+  Layers,
+  Boxes,
+  MessageSquare,
+  Zap,
+  ClipboardCheck,
+  ShieldCheck,
+  Headphones,
+  Wrench,
+  Phone,
+  Mail,
+  Timer,
+} from "lucide-react";
+import Base from "@/layouts/Base.astro";
+import TrustBar from "@/components/TrustBar.astro";
+import DfaReviewBanner from "@/components/DfaReviewBanner.astro";
+import RfqIsland from "@/islands/RfqIsland.jsx";
+import { PCB_IMAGES, SITE, QUICK_TURN, DFA_REVIEW } from "@/lib/site";
+import { getI18n, localeStaticPaths, langFromParams } from "@/i18n/core";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = langFromParams(Astro.params);
+const { t, tl, href } = getI18n(lang);
+
+// Text for each card lives in src/locales/*.json under home.services.items / home.why.items.
+const CORE_SERVICES = [
+  { key: "smt", icon: CircuitBoard, img: "/assets/pcb-3.jpg" },
+  { key: "pcb", icon: Cpu, img: "/assets/pcb-1.jpg" },
+  { key: "prototype", icon: Layers, img: "/assets/about-2.jpg" },
+  { key: "lowvolume", icon: Boxes, img: "/assets/low-volume.jpg" },
+].map((s) => ({
+  ...s,
+  title: t(`home.services.items.${s.key}.title`),
+  body: t(`home.services.items.${s.key}.body`),
+  alt: t(`home.services.items.${s.key}.alt`),
+}));
+
+const WHY = [
+  { key: "communication", icon: MessageSquare, img: PCB_IMAGES.whyCommunication },
+  { key: "prototype", icon: Zap, img: PCB_IMAGES.whyPrototype },
+  { key: "support", icon: ClipboardCheck, img: PCB_IMAGES.whyReview },
+  { key: "quality", icon: ShieldCheck, img: PCB_IMAGES.whyInspection },
+].map((v) => ({
+  ...v,
+  t: t(`home.why.items.${v.key}.title`),
+  d: t(`home.why.items.${v.key}.body`),
+  alt: t(`home.why.items.${v.key}.alt`),
+}));
+
+const GALLERY = ["/assets/facility-ys12f.jpg", "/assets/facility-reflow.jpg", "/assets/facility-4.jpg"];
+---
+
+<Base lang={lang} path="/">
+  <div data-testid="page-home">
+    <!-- TOP CALL-OUT STRIP -->
+    <div
+      data-testid="home-callout"
+      class="bg-white border-b border-gray-200"
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-3">
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-2 text-[15px] text-black font-medium">
+          <span data-testid="home-callout-tagline" class="text-black">
+            {t("home.callout.before")}
+          </span>
+          <a
+            href="tel:+19098715566"
+            data-testid="home-callout-phone"
+            class="inline-flex items-center gap-2 font-semibold text-black hover:underline"
+          >
+            <Phone size={14} />
+            909-871-5566
+          </a>
+          <span class="text-black">{t("home.callout.after")}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden border-b border-gray-200 bg-white">
+      <div class="absolute inset-0 gt-grid-bg opacity-50 pointer-events-none"></div>
+      <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 lg:pt-28 pb-20 lg:pb-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+          <div class="lg:col-span-6 gt-reveal">
+            <div class="text-sm md:text-base tracking-widest text-red-600 uppercase font-bold mb-5">
+              {t("home.hero.overline")}
+            </div>
+            <p
+              data-testid="hero-quick-turn"
+              class="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 text-sm sm:text-[15px] font-bold mb-7"
+            >
+              <Zap size={16} aria-hidden="true" />
+              {t("quickTurn.headline", { defaultValue: QUICK_TURN.headline })}
+            </p>
+            <h1 class="font-display text-[44px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-semibold text-gray-900">
+              {/* One line: Astro turns line breaks between these into spaces, which breaks CJK. */}
+                {t("home.hero.titleBefore")}<span class="text-red-600">{t("home.hero.highlight1")}</span>{t("home.hero.titleMiddle")}<span class="text-red-600">{t("home.hero.highlight2")}</span>{t("home.hero.titleAfter")}
+            </h1>
+            <p class="mt-8 text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
+              {t("home.hero.body")}
+            </p>
+            <div class="mt-10 flex flex-wrap gap-3">
+              <a href={href("/quote")} data-testid="hero-cta-quote" class="btn-primary">
+                {t("quickTurn.cta", { defaultValue: QUICK_TURN.cta })} <ArrowUpRight size={16} />
+              </a>
+              <a href={href("/dfa-review")} data-testid="hero-cta-dfa" class="btn-secondary">
+                {t("dfa.short", { defaultValue: DFA_REVIEW.short })} <ArrowRight size={16} />
+              </a>
+            </div>
+            <p class="mt-5 flex items-center gap-2 text-sm text-gray-600">
+              <Timer size={15} className="text-red-600" aria-hidden="true" />
+              {t("home.hero.detailLine", { detail: t("quickTurn.detail", { defaultValue: QUICK_TURN.detail }) })}
+            </p>
+          </div>
+
+          <div class="lg:col-span-6 gt-reveal delay-2">
+            <div class="relative border border-gray-200">
+              <img
+                src={PCB_IMAGES.hero}
+                alt={t("home.hero.imgAlt")}
+                class="w-full h-[400px] lg:h-[520px] object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <TrustBar lang={lang} />
+
+    <!-- CORE SERVICES -->
+    <section class="border-b border-gray-200 bg-white" data-testid="section-core-services">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
+          <div class="lg:col-span-5">
+            <div class="text-sm md:text-[15px] tracking-widest text-red-600 uppercase font-bold mb-4">
+              {t("home.services.overline")}
+            </div>
+            <h2 class="font-display text-4xl lg:text-5xl tracking-tight font-semibold text-gray-900 leading-[1.1]">
+              {t("home.services.title")}
+            </h2>
+          </div>
+          <div class="lg:col-span-7">
+            <p class="text-lg lg:text-xl text-gray-600 leading-relaxed">
+              {t("home.services.body")}
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
+          {CORE_SERVICES.map((s, i) => {
+            const Icon = s.icon;
+            return (
+            <div data-testid={`core-service-${i}`} class="bg-white flex flex-col">
+              <div class="aspect-[4/3] overflow-hidden border-b border-gray-200">
+                <img
+                  src={s.img}
+                  alt={s.alt}
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              <div class="p-8 flex flex-col flex-1">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-10 h-10 border border-gray-200 flex items-center justify-center text-red-600">
+                    <Icon size={18} />
+                  </div>
+                  <div class="font-mono text-xs tracking-widest text-red-600">
+                    0{i + 1}
+                  </div>
+                </div>
+                <h3 class="font-display text-xl font-semibold text-gray-900">
+                  {s.title}
+                </h3>
+                <p class="text-[15px] text-gray-600 mt-3 leading-relaxed flex-1">
+                  {s.body}
+                </p>
+              </div>
+            </div>
+          );
+          })}
+        </div>
+
+        <div class="mt-12">
+          <a
+            href={href("/services")}
+            data-testid="core-services-link"
+            class="inline-flex items-center gap-2 text-sm font-medium text-gray-900 border-b border-gray-900 pb-1 hover:text-red-600 hover:border-red-600 transition-colors"
+          >
+            {t("home.services.link")} <ArrowRight size={16} />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <DfaReviewBanner lang={lang} />
+
+    <!-- WHY / CAPABILITIES -->
+    <section class="border-b border-gray-200 bg-white" data-testid="section-why">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+        <div class="max-w-3xl mb-16">
+          <div class="text-sm md:text-[15px] tracking-widest text-black uppercase font-bold mb-4">
+            {t("home.why.overline")}
+          </div>
+          <h2 class="text-4xl lg:text-5xl tracking-tight font-semibold text-black leading-[1.1]">
+            {t("home.why.title")}
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {WHY.map((v, i) => {
+            const Icon = v.icon;
+            return (
+            <div
+              data-testid={`why-${i}`}
+              class="bg-white border border-gray-200 flex flex-col overflow-hidden"
+            >
+              <div class="aspect-[4/3] overflow-hidden border-b border-gray-200 bg-gray-100">
+                <img
+                  src={v.img}
+                  alt={v.alt}
+                  loading="lazy"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6 lg:p-7 flex flex-col flex-1">
+                <div class="w-10 h-10 border border-gray-300 flex items-center justify-center text-black mb-5">
+                  <Icon size={18} />
+                </div>
+                <h3 class="text-lg font-semibold text-black leading-snug">
+                  {v.t}
+                </h3>
+                <p class="text-[15px] text-black/80 mt-3 leading-relaxed flex-1">
+                  {v.d}
+                </p>
+              </div>
+            </div>
+          );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- SHORT COMPANY INTRO -->
+    <section class="border-b border-gray-200 bg-white" data-testid="section-about">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+          <div class="lg:col-span-6">
+            <div class="text-sm md:text-[15px] tracking-widest text-red-600 uppercase font-bold mb-4">
+              {t("home.about.overline")}
+            </div>
+            <h2 class="font-display text-4xl lg:text-5xl tracking-tight font-semibold text-gray-900 leading-[1.1]">
+              {t("home.about.title")}
+            </h2>
+            <div class="mt-8 space-y-5 text-lg text-gray-600 leading-relaxed">
+              {tl("home.about.paragraphs").map((p) => <p>{p}</p>)}
+            </div>
+            <div class="mt-10 grid grid-cols-3 gap-6 max-w-md">
+              {tl("home.about.facts").map(([k, v]) => (
+                <div class="border-l-2 border-red-600 pl-4">
+                  <div class="text-xs tracking-widest text-red-600 uppercase font-bold">{k}</div>
+                  <div class="mt-1 text-gray-900 text-sm font-medium">{v}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="lg:col-span-6">
+            <div class="grid grid-cols-2 gap-4">
+              {/* Goodtron's own facility photos (the stock board photos already appear in the service cards). */}
+              {GALLERY.map(
+                (src, i) => (
+                  <div
+                    class={`overflow-hidden border border-gray-200 ${
+                      i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"
+                    }`}
+                  >
+                    <img
+                      src={src}
+                      alt={tl("home.about.gallery")[i]}
+                      loading="lazy"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section id="support" class="border-b border-gray-200 bg-[#F9FAFB] scroll-mt-32" data-testid="section-support">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+        <div class="max-w-3xl mb-16">
+          <div class="text-sm md:text-[15px] tracking-widest text-black uppercase font-bold mb-4">
+            {t("home.support.overline")}
+          </div>
+          <h2 class="text-4xl lg:text-5xl tracking-tight font-semibold text-black leading-[1.1]">
+            {t("home.support.title")}
+          </h2>
+          <p class="mt-5 text-lg text-black/80 leading-relaxed">
+            {t("home.support.body")}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div
+            data-testid="support-customer"
+            class="bg-white border border-gray-200 p-10"
+          >
+            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center text-black mb-8">
+              <Headphones size={20} />
+            </div>
+            <div class="text-xs tracking-[0.18em] uppercase text-black/70 font-semibold mb-3">
+              {t("home.support.customer.tag")}
+            </div>
+            <h3 class="text-2xl font-semibold text-black">
+              {t("home.support.customer.title")}
+            </h3>
+            <p class="mt-4 text-[15px] text-black/80 leading-relaxed">
+              {t("home.support.customer.body")}
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a
+                href={href("/contact-form")}
+                data-testid="support-customer-contact"
+                class="btn-primary"
+              >
+                {t("home.support.customer.contactForm")} <ArrowUpRight size={14} />
+              </a>
+              <a
+                href={href("/quote")}
+                data-testid="support-customer-quote"
+                class="btn-secondary"
+              >
+                {t("home.support.customer.quoteForm")} <ArrowUpRight size={14} />
+              </a>
+            </div>
+            <div class="mt-6 pt-5 border-t border-gray-200 space-y-2">
+              <a
+                href={`tel:${SITE.phoneHref}`}
+                data-testid="support-customer-phone"
+                class="flex items-center gap-3 text-[14px] text-black hover:underline"
+              >
+                <Phone size={14} className="text-black" />
+                {SITE.phone}
+              </a>
+              <a
+                href={`mailto:${SITE.email}`}
+                data-testid="support-customer-email"
+                class="flex items-center gap-3 text-[14px] text-black hover:underline"
+              >
+                <Mail size={14} className="text-black" />
+                {SITE.email}
+              </a>
+            </div>
+          </div>
+
+          <div
+            data-testid="support-technical"
+            class="bg-white border border-gray-200 p-10"
+          >
+            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center text-black mb-8">
+              <Wrench size={20} />
+            </div>
+            <div class="text-xs tracking-[0.18em] uppercase text-black/70 font-semibold mb-3">
+              {t("home.support.technical.tag")}
+            </div>
+            <h3 class="text-2xl font-semibold text-black">
+              {t("home.support.technical.title")}
+            </h3>
+            <p class="mt-4 text-[15px] text-black/80 leading-relaxed">
+              {t("home.support.technical.body")}
+            </p>
+            <div class="mt-8 space-y-3">
+              <a
+                href={`tel:${SITE.phoneHref}`}
+                data-testid="support-technical-phone"
+                class="flex items-center gap-3 text-[15px] text-black hover:underline"
+              >
+                <Phone size={16} className="text-black" />
+                {SITE.phone}
+              </a>
+              <a
+                href={`mailto:${SITE.email}`}
+                data-testid="support-technical-email"
+                class="flex items-center gap-3 text-[15px] text-black hover:underline"
+              >
+                <Mail size={16} className="text-black" />
+                {SITE.email}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMBEDDED RFQ -->
+    <section id="rfq" class="bg-[#0A0A0A] relative overflow-hidden scroll-mt-32" data-testid="section-rfq">
+      <div class="absolute inset-0 gt-grid-bg-dark opacity-40 pointer-events-none"></div>
+      <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-4 text-white">
+            <div class="text-sm md:text-[15px] tracking-widest text-red-500 uppercase font-bold mb-4">
+              {t("home.rfq.overline")}
+            </div>
+            <h2 class="font-display text-3xl lg:text-5xl tracking-tight font-semibold leading-tight">
+              {t("home.rfq.title")}
+            </h2>
+            <p class="mt-5 text-gray-400 text-lg leading-relaxed">
+              {t("home.rfq.body")}
+            </p>
+            <div class="mt-8 text-sm text-gray-400 font-mono tracking-wider space-y-1">
+              <div>{SITE.email}</div>
+              <div>{SITE.phone}</div>
+            </div>
+          </div>
+          <div class="lg:col-span-8">
+            <RfqIsland client:visible lang={lang} testId="home-rfq" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

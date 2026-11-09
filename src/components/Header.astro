@@ -1,0 +1,132 @@
+---
+import { Menu, X, ArrowUpRight, Zap } from "lucide-react";
+import { NAV, QUICK_TURN } from "@/lib/site";
+import { getI18n } from "@/i18n/core";
+import Logo from "@/components/Logo.astro";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
+
+const { lang, path } = Astro.props;
+const { t, href } = getI18n(lang);
+const navLabel = (item) => t(`nav.${item.key}`, { defaultValue: item.label });
+// Hash items (Support) never show as active; pages match exactly.
+const isActive = (to) => !to.includes("#") && to === path;
+---
+
+<header data-testid="site-header" class="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200">
+  <div data-testid="quick-turn-strip" class="bg-[#0A0A0A] text-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 h-10 flex items-center justify-between gap-4 text-[13px] sm:text-sm">
+      <p class="flex items-center gap-2 min-w-0">
+        <Zap size={14} className="text-red-500 shrink-0" aria-hidden="true" />
+        <strong class="font-semibold truncate">
+          <span class="sm:hidden">{t("quickTurn.short", { defaultValue: QUICK_TURN.short })}</span>
+          <span class="hidden sm:inline">{t("quickTurn.headline", { defaultValue: QUICK_TURN.headline })}</span>
+        </strong>
+        <span class="hidden xl:inline text-gray-400">· {t("quickTurn.detail", { defaultValue: QUICK_TURN.detail })}</span>
+      </p>
+      <div class="shrink-0 flex items-center gap-5">
+        <LanguageSwitcher lang={lang} path={path} dark class="hidden lg:flex" />
+        <a
+          href={href("/quote")}
+          data-testid="quick-turn-strip-cta"
+          class="shrink-0 inline-flex items-center gap-1 font-semibold text-red-400 hover:text-white transition-colors"
+        >
+          <span class="sm:hidden">{t("header.stripShortCta")}</span>
+          <span class="hidden sm:inline">{t("quickTurn.cta", { defaultValue: QUICK_TURN.cta })}</span>
+          <ArrowUpRight size={14} aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <Logo lang={lang} />
+
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-7" aria-label="Main">
+        {
+          NAV.filter((n) => n.to !== "/").map((item) => (
+            <a
+              href={href(item.to)}
+              data-testid={`nav-${item.key}`}
+              aria-current={isActive(item.to) ? "page" : undefined}
+              class:list={[
+                "text-sm font-medium whitespace-nowrap transition-colors",
+                isActive(item.to) ? "text-red-600" : "text-gray-700 hover:text-gray-900",
+              ]}
+            >
+              {navLabel(item)}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-3">
+        <a href={href("/quote")} data-testid="header-cta-quote" class="btn-primary text-sm whitespace-nowrap">
+          {t("common.getQuote")}
+          <ArrowUpRight size={16} />
+        </a>
+      </div>
+
+      <button
+        type="button"
+        data-testid="mobile-menu-toggle"
+        aria-label={t("header.menu")}
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="lg:hidden p-2 text-gray-900"
+      >
+        <span data-icon="open"><Menu size={22} /></span>
+        <span data-icon="close" class="hidden"><X size={22} /></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" data-testid="mobile-menu" class="hidden lg:hidden border-t border-gray-200 bg-white">
+    <div class="px-6 py-4 flex flex-col gap-1">
+      {
+        NAV.map((item) => (
+          <a
+            href={href(item.to)}
+            data-testid={`mobile-nav-${item.key}`}
+            aria-current={isActive(item.to) ? "page" : undefined}
+            class:list={[
+              "py-3 border-b border-gray-100 text-base font-medium",
+              isActive(item.to) ? "text-red-600" : "text-gray-800",
+            ]}
+          >
+            {navLabel(item)}
+          </a>
+        ))
+      }
+      <LanguageSwitcher lang={lang} path={path} class="mt-4" testId="mobile-lang-switcher" />
+      <a href={href("/quote")} data-testid="mobile-cta-quote" class="btn-primary mt-4 justify-center">
+        {t("quickTurn.cta", { defaultValue: QUICK_TURN.cta })}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Not "@/i18n/core": that would bundle every dictionary into this script.
+  import { PREF_STORAGE_KEY } from "@/i18n/constants";
+
+  const toggle = document.querySelector('[data-testid="mobile-menu-toggle"]');
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(open));
+    menu.classList.toggle("hidden", !open);
+    toggle.querySelector('[data-icon="open"]').classList.toggle("hidden", open);
+    toggle.querySelector('[data-icon="close"]').classList.toggle("hidden", !open);
+  });
+
+  // Remember the chosen language so the English URLs forward to it next time.
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("[data-lang-pref]");
+    if (!link) return;
+    try {
+      localStorage.setItem(PREF_STORAGE_KEY, link.dataset.langPref);
+    } catch {
+      // Storage blocked — the link still switches language for this visit.
+    }
+  });
+</script>
