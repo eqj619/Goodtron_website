@@ -348,8 +348,7 @@
           "comet-xray": {
             "name": "Comet FeinFocus Cougar",
             "role": "X-ray inspection",
-            "body": "Non-destructive review of BGA solder-ball patterns, suspected bridging or voiding, and hidden joints.",
-            "alt": "Comet FeinFocus Cougar X-ray inspection system with its control console"
+            "body": "Non-destructive review of BGA solder-ball patterns, suspected bridging or voiding, and hidden joints."
           },
           "trident-cleaning": {
             "name": "Trident Cleaning System",

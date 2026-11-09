@@ -38,11 +38,11 @@ const EQUIPMENT = [
   alt: t(`services.equipment.items.${e.key}.alt`),
 }));
 
-// Inspection and finishing machines from the 2026 company profile. Only the X-ray photo is used:
-// the profile's AOI and cleaning photos show a large factory floor we don't have.
+// Inspection and finishing machines from the 2026 company profile. The profile's photos of these
+// machines aren't Goodtron's own, so the cards show icons until we have real photos.
 const MORE_EQUIPMENT = [
   { key: "mirtec-aoi", icon: ScanSearch },
-  { key: "comet-xray", icon: ScanLine, img: "/assets/facility-xray.jpg" },
+  { key: "comet-xray", icon: ScanLine },
   { key: "trident-cleaning", icon: Droplets },
 ].map((e) => ({
   ...e,

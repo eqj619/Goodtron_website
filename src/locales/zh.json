@@ -446,8 +446,7 @@
           "comet-xray": {
             "name": "Comet FeinFocus Cougar",
             "role": "X 射线检测",
-            "body": "无损检查 BGA 焊球、疑似桥连或空洞，以及隐藏焊点。",
-            "alt": "Comet FeinFocus Cougar X 射线检测设备及其操作台"
+            "body": "无损检查 BGA 焊球、疑似桥连或空洞，以及隐藏焊点。"
           },
           "trident-cleaning": {
             "name": "Trident 清洗系统",
