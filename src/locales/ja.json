@@ -446,7 +446,8 @@
           "comet-xray": {
             "name": "Comet FeinFocus Cougar",
             "role": "X線検査",
-            "body": "BGA のはんだボール、ブリッジやボイドの疑い、見えない接合部を非破壊で確認します。"
+            "body": "BGA のはんだボール、ブリッジやボイドの疑い、見えない接合部を非破壊で確認します。",
+            "alt": "Comet FeinFocus Cougar X線検査装置と操作卓"
           },
           "trident-cleaning": {
             "name": "Trident 洗浄装置",
