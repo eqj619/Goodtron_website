@@ -3,11 +3,11 @@ import { QUALITY_BADGES } from "@/lib/site";
 import { getI18n } from "@/i18n/core";
 import { QUALITY_ICONS } from "@/components/qualityIcons";
 
-// Detailed cards for the Services page, grouped by Inspection / Standards.
+// Detailed cards for the Services page, grouped by Inspection / Process.
 // English badge copy comes from site.js; ja/zh from services.quality.items.
 const { lang } = Astro.props;
 const { t } = getI18n(lang);
-const groups = ["Inspection", "Standards"];
+const groups = ["Inspection", "Process"];
 ---
 
 <section id="quality" data-testid="section-quality" class="border-b border-gray-200 bg-white scroll-mt-32">

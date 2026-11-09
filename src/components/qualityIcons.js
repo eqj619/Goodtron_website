@@ -1,10 +1,10 @@
-import { ScanSearch, ScanLine, Microscope, BadgeCheck, HeartPulse, Shield } from "lucide-react";
+import { ScanSearch, ScanLine, Microscope, BadgeCheck, ListChecks, Droplets } from "lucide-react";
 
 export const QUALITY_ICONS = {
   aoi: ScanSearch,
   xray: ScanLine,
   visual: Microscope,
-  ipc: BadgeCheck,
-  iso13485: HeartPulse,
-  itar: Shield,
+  iso9001: BadgeCheck,
+  gates: ListChecks,
+  cleaning: Droplets,
 };
